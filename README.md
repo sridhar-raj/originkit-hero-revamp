@@ -1,10 +1,11 @@
-# hero-revamp
+# OriginKit Hero Revamp
 
-An agent skill (for Claude Code, Cursor and other agents that read `SKILL.md`) that revamps an **existing**
-website hero in React / Next.js + Tailwind, so it reads in seconds, looks like the product instead of a
-template, loads fast, and **proves it with before/after measurements**.
+An agent skill (for Claude Code, Cursor and other agents that read `SKILL.md`) that rebuilds an **existing**
+website hero in React / Next.js + Tailwind **around [OriginKit](https://www.originkit.dev) components**, so it
+reads in seconds, looks modern and unmistakably its own instead of templated, loads fast, and **proves it with
+before/after measurements**.
 
-**[See three measured rebuilds](https://sridhar-raj.github.io/hero-revamp/)**: an invoicing SaaS, a running app and a
+**[See three measured rebuilds](https://sridhar-raj.github.io/originkit-hero-revamp/)**: an invoicing SaaS, a running app and a
 developer CLI, each taken from the usual template hero to a rebuilt one. On a throttled phone connection the
 largest paint drops from about 1.1-1.4 s to 0.22-0.24 s, and every case goes from 4 failures and 16 warnings to none.
 
@@ -16,7 +17,8 @@ largest paint drops from about 1.1-1.4 s to 0.22-0.24 s, and every case goes fro
    media (lazy hero images, oversized files, video without `muted`/`playsInline`/poster), what still moves
    under reduced motion, first-load weight, and static Next.js traps in the source.
 2. **Diagnose** in a fixed order: clarity, action, legibility, speed, distinctiveness, each tied to evidence.
-3. **Rebuild** from an archetype that fits the product (10 measured from 14 live heroes: product UI, live demo,
+3. **Rebuild** around one signature OriginKit component (a background, 3D object, text effect, button, or one of
+   71 OriginKit hero sections) chosen for what it says about the product, from an archetype that fits the product (10 measured from 14 live heroes: product UI, live demo,
    editorial type, brand object, full-bleed media, shader backdrop, made-work collage, kinetic headline,
    asymmetric split, quiet type), with type, CTA and motion numbers read from real sites.
 4. **Prove** it: the same audit again, then a before/after report (HTML, plus a Markdown table for the PR).
@@ -24,10 +26,10 @@ largest paint drops from about 1.1-1.4 s to 0.22-0.24 s, and every case goes fro
 ## Install
 
 ```bash
-npx skills add sridhar-raj/hero-revamp
+npx skills add sridhar-raj/originkit-hero-revamp
 ```
 
-Or copy this folder into `.claude/skills/hero-revamp/` (Claude Code) or your agent's skills directory. The
+Or copy this folder into `.claude/skills/originkit-hero-revamp/` (Claude Code) or your agent's skills directory. The
 scripts need Node 20+ and Playwright with Chromium in the project (`pnpm add -D playwright`).
 
 ## Use it without an agent
@@ -52,13 +54,16 @@ audit warns when it sees a dev server.
 | `scripts/test-audit.mjs` | The audit's own tests, with fixtures in `scripts/fixtures/` |
 | `references/evidence.md` | Every rule with its source, tagged verified / standard / opinion / unverified (popular claims with no primary source are listed so nobody repeats them) |
 | `references/patterns.md` | Archetypes and measured type, CTA and motion numbers from 14 live heroes (Linear, Vercel, Stripe, Raycast, Cursor, Resend, Framer, Clerk, Notion, Figma, Anthropic, Dia, Apple, Supabase) |
+| `references/originkit.md` | OriginKit in the rebuild: your account, categories by archetype, the signature-component rule, the modern-and-unique bar, WebGL build rules |
 | `references/nextjs.md` | Next.js 16 + Tailwind v4: images (`priority` is deprecated), fonts, video, WebGL, CLS, `svh`, codemods |
 
-## OriginKit (optional, your own account)
+## Connect your OriginKit account
 
-The visual slot can be an OriginKit component, fetched with **your own** account: `npx originkit login` (browser
-sign-in) and `npx originkit add <slug>`, or the OriginKit MCP with your key. Adding spends your quota. Nothing from
-OriginKit ships in this repo.
+Every rebuild uses **your own** OriginKit account: `npx originkit login` (browser sign-in, no API key), or the
+OriginKit MCP (`claude mcp add -s local --transport http originkit https://mcp.originkit.dev/mcp --header "Authorization: Bearer <your key>"`).
+Browsing is free; adding a component spends your quota, so the skill proposes its picks and agrees them with
+you first. Not connected? It still runs, builds the visual in HTML/CSS, and names the components to add later.
+Nothing from OriginKit ships in this repo (the demo pages are plain HTML/CSS).
 
 ## References it can research
 

@@ -1,25 +1,31 @@
 ---
-name: hero-revamp
+name: originkit-hero-revamp
 description: >-
-  Revamp an existing website hero (the first screen) in React / Next.js + Tailwind so it reads in seconds,
-  looks distinctive instead of templated, loads fast, and prove it with before/after measurements. It audits
-  the current hero in a real browser (LCP and its element, CLS, blocking time, headline length and lines,
-  contrast over imagery, CTA count, size and labels, phone fit, motion under reduced-motion, Next.js traps such
-  as the deprecated `priority`, `h-screen`, lazy hero images), diagnoses what is wrong from evidence, picks an
-  archetype that fits the product, rebuilds the hero, and writes a before/after report. Use it whenever someone
-  asks to redesign, revamp, refresh, modernise, fix or improve a hero, first screen, above-the-fold section or
-  landing-page top, or says the hero looks generic, cheap, AI-made, cluttered, slow or doesn't convert, even if
-  they never say "hero". Not for building a page from scratch with no existing hero.
+  OriginKit Hero Revamp: rebuild an existing website hero (the first screen) in React / Next.js + Tailwind
+  around OriginKit components, so it reads in seconds, looks modern and unmistakably its own instead of
+  templated, loads fast, and is proven with before/after measurements. It audits the current hero in a real
+  browser (LCP and its element, CLS, blocking time, when the CTAs become visible, headline length and lines,
+  contrast over imagery, CTA count, size and labels, phone fit, motion under reduced-motion, Next.js traps),
+  diagnoses it from evidence, picks an archetype and a signature OriginKit component (backgrounds, 3D objects,
+  text effects, buttons, or one of 71 hero sections) through the user's own OriginKit login or MCP, rebuilds the
+  hero, and writes a before/after report. Use it whenever someone asks to redesign, revamp, refresh, modernise,
+  fix or improve a hero, first screen, above-the-fold section or landing-page top, or says it looks generic,
+  cheap, AI-made, cluttered, slow or doesn't convert, even if they never say "hero" or "OriginKit".
 ---
 
-# Hero revamp
+# OriginKit Hero Revamp
 
 A hero has about ten seconds to say what the product is, who it's for and what to do next (NN/g), and the
 look is judged before a word is read (Lindgaard: 50 ms). Most heroes fail in the same few ways: a clever
 headline that never names the product, a ghost or missing call to action, text on a busy image, a carousel,
 a lazy-loaded hero image, `100vh` on phones, and the template look (centred headline with one gradient
 word, purple glow, eyebrow pill, two buttons, logo strip). This skill fixes an existing hero in four moves,
-**measure → diagnose → rebuild → prove**, and never claims an improvement it didn't measure.
+**measure → diagnose → rebuild → prove**, never claims an improvement it didn't measure, and builds the new
+hero around **OriginKit components**: one signature component that says something true about the product, so
+every rebuild comes out modern and its own (`references/originkit.md`).
+
+**Before you start:** connect your own OriginKit account (`npx originkit login`, or the OriginKit MCP with your
+key; details in `references/originkit.md`). Not connected? The skill still runs and names the components to add later.
 
 `<skill>` below is this skill's folder. The scripts need Node 20+ and Playwright (Chromium) in the project.
 
@@ -90,15 +96,22 @@ copy where it's vague, the visual, the code traps.
 1. **Choose the archetype** from `references/patterns.md` that the product's truth supports (product UI, live
    demo, editorial type, brand object, full-bleed media, shader backdrop, made-work collage, kinetic headline,
    asymmetric split, quiet type). Say in one line why it fits this product and not its competitors.
-2. **Write the copy first:** headline (literal, key noun early, 1 line desktop / ≤ 3 on a phone), one subhead
+2. **Pick the OriginKit components** (`references/originkit.md`): browse the categories that match the
+   archetype (or start from one of the 71 OriginKit hero sections), choose **one signature component** that says
+   something true about the product, plus at most a text effect and a distinctive primary button. Propose the
+   picks with their links and why, agree them with the user, then add each once (it spends their quota). Wire
+   the signature component's props to the product's state where you can.
+3. **Write the copy first:** headline (literal, key noun early, 1 line desktop / ≤ 3 on a phone), one subhead
    sentence of 8-18 words, a CTA label that names the outcome, one piece of real proof.
-3. **Set the type with measured numbers** (patterns.md): e.g. `text-[clamp(2.375rem,1.77rem+2.48vw,4rem)]
+4. **Set the type with measured numbers** (patterns.md): e.g. `text-[clamp(2.375rem,1.77rem+2.48vw,4rem)]
    leading-none tracking-[-0.022em] text-balance`; subhead `max-w-[36rem] text-lg`.
-4. **Build it right in Next.js** (nextjs.md, codemods table): `min-h-svh` not `h-screen`; the hero image with
+5. **Build it right in Next.js** (nextjs.md, codemods table): `min-h-svh` not `h-screen`; the hero image with
    `fetchPriority="high" loading="eager"` and `sizes`, never lazy, never `priority`; next/font; posters and a
    pause control for video; canvas/WebGL lazy with a still fallback; nothing at `opacity: 0` that is the LCP.
-5. **Motion** (patterns.md, Load motion): one orchestrated moment at most, or none, with the motion in the
+6. **Motion** (patterns.md, Load motion): one orchestrated moment at most, or none, with the motion in the
    visual; respect `prefers-reduced-motion`.
+7. **Hold the modern-and-unique bar** (`references/originkit.md`): if the hero could swap logos with a competitor,
+   shows the template tells, or its signature component is decoration the copy never connects to, it isn't done.
 
 ## 4. Prove it
 
@@ -112,7 +125,7 @@ and prints a Markdown table for the PR or reply. **A revamp is done only when** 
 regressed without a stated reason, and both screenshots look right. Report numbers as measured, with the flags
 used; say which items are judgment (distinctiveness, copy) rather than measured.
 
-## Studio notes (this project)
+## Companion skills
 
 Use these companion skills when installed (all are in this studio), each for its own job:
 
@@ -126,29 +139,12 @@ Use these companion skills when installed (all are in this studio), each for its
 | Glass, blur, text over imagery or video | **blur-craft** (material, `glass-contrast.mjs`, `frost-check.mjs`) |
 | Product UI in the visual slot (archetypes 1, 2) | **stageshow** |
 | A scroll-scrubbed or plugin-driven motion | the **gsap-*** skills; otherwise Framer Motion |
-| The visual itself: a WebGL background, 3D object, text effect | **OriginKit** through your own CLI login or MCP (below); in the OriginKit X studio also `pnpm ok:find` (cached catalog) and the **originkit-x-post** skill's rules |
+| The visual itself: a hero section, background, 3D object, text effect, button | **OriginKit** through your own CLI login or MCP (`references/originkit.md`); in the OriginKit X studio also `pnpm ok:find` (cached catalog) and the **originkit-x-post** skill's rules |
 
-### OriginKit for the visual slot (your own account)
+### OriginKit
 
-The hero's visual (a WebGL background, a 3D object, a text effect, a button) can come from OriginKit. Each user
-connects **their own** OriginKit account; the skill never ships OriginKit code and never uses someone else's key.
-
-- **CLI** (simplest): `npx originkit login` (signs in through the browser, no API key), then
-  `npx originkit search "<words>"` / `npx originkit list` to browse (free) and `npx originkit add <slug>` to
-  install (**spends your quota**: each add is a live delivery). `npx originkit whoami` shows which account is used.
-- **MCP**: `claude mcp add --transport http originkit https://mcp.originkit.dev/mcp --header "Authorization: Bearer <your OriginKit API key>"`
-  (`-s local` keeps the key out of the repo). `search` / `list_components` browse; `get_component` / `fetch`
-  deliver and spend quota.
-- Not connected? Say so, build the visual in HTML/CSS (as the demo does), and name the OriginKit component that
-  would fit so the user can add it later.
-
-Match the archetype to a catalog category: shader backdrop / full-bleed → background animations; brand object
-→ 3D and animation; kinetic headline → text effects; the primary CTA → buttons. Browse first, agree the pick
-with the user, then add once (check the project for an already-installed copy before spending quota). Keep the
-key out of git, and don't commit OriginKit component source to a public repo unless your licence allows it.
-
-OriginKit WebGL components are canvases, so they're never the LCP: keep a real `<h1>` (and a still image if the
-canvas is the main visual) above or behind them, and lazy-mount heavy scenes (nextjs.md, WebGL).
+Connecting your account, the archetype-to-category map, the signature rule, the modern-and-unique bar, build
+rules for WebGL components and quota etiquette: `references/originkit.md`.
 
 ## Files
 
@@ -159,3 +155,4 @@ canvas is the main visual) above or behind them, and lazy-mount heavy scenes (ne
 - `references/evidence.md`: every rule with its source and how sure it is (verified / standard / opinion / unverified).
 - `references/patterns.md`: 10 archetypes and measured type, CTA and motion numbers from 14 live heroes.
 - `references/nextjs.md`: Next.js 16 + Tailwind v4 specifics: images, fonts, video, WebGL, CLS, viewport units, codemods.
+- `references/originkit.md`: OriginKit in the rebuild: your account, categories by archetype, the signature rule, the modern-and-unique bar.
