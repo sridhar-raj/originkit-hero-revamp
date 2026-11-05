@@ -38,7 +38,7 @@ node <skill>/scripts/hero-audit.mjs http://localhost:3000 --out .hero/before --s
   flags for the after run.
 - `--selector` if the hero isn't the section around the first `<h1>`.
 
-It writes `.hero/before/audit.json`, `desktop.png`, `phone.png` and prints FAIL / WARN / PASS lines. **Look at
+It writes `.hero/before/audit.json`, `desktop.jpg`, `phone.jpg` and prints FAIL / WARN / PASS lines. **Look at
 both screenshots** before reading the numbers.
 
 ## 2. Diagnose
@@ -126,7 +126,26 @@ Use these companion skills when installed (all are in this studio), each for its
 | Glass, blur, text over imagery or video | **blur-craft** (material, `glass-contrast.mjs`, `frost-check.mjs`) |
 | Product UI in the visual slot (archetypes 1, 2) | **stageshow** |
 | A scroll-scrubbed or plugin-driven motion | the **gsap-*** skills; otherwise Framer Motion |
-| The visual itself: a WebGL background, 3D object, text effect | **OriginKit**: search the cached catalog (`pnpm ok:find <words>`), check `src/sections/*/components/` before adding, then `pnpm exec originkit add <slug>` (spends quota); follow the **originkit-x-post** skill's rules (real use case, vary components, self-contained sections) |
+| The visual itself: a WebGL background, 3D object, text effect | **OriginKit** through your own CLI login or MCP (below); in the OriginKit X studio also `pnpm ok:find` (cached catalog) and the **originkit-x-post** skill's rules |
+
+### OriginKit for the visual slot (your own account)
+
+The hero's visual (a WebGL background, a 3D object, a text effect, a button) can come from OriginKit. Each user
+connects **their own** OriginKit account; the skill never ships OriginKit code and never uses someone else's key.
+
+- **CLI** (simplest): `npx originkit login` (signs in through the browser, no API key), then
+  `npx originkit search "<words>"` / `npx originkit list` to browse (free) and `npx originkit add <slug>` to
+  install (**spends your quota**: each add is a live delivery). `npx originkit whoami` shows which account is used.
+- **MCP**: `claude mcp add --transport http originkit https://mcp.originkit.dev/mcp --header "Authorization: Bearer <your OriginKit API key>"`
+  (`-s local` keeps the key out of the repo). `search` / `list_components` browse; `get_component` / `fetch`
+  deliver and spend quota.
+- Not connected? Say so, build the visual in HTML/CSS (as the demo does), and name the OriginKit component that
+  would fit so the user can add it later.
+
+Match the archetype to a catalog category: shader backdrop / full-bleed → background animations; brand object
+→ 3D and animation; kinetic headline → text effects; the primary CTA → buttons. Browse first, agree the pick
+with the user, then add once (check the project for an already-installed copy before spending quota). Keep the
+key out of git, and don't commit OriginKit component source to a public repo unless your licence allows it.
 
 OriginKit WebGL components are canvases, so they're never the LCP: keep a real `<h1>` (and a still image if the
 canvas is the main visual) above or behind them, and lazy-mount heavy scenes (nextjs.md, WebGL).

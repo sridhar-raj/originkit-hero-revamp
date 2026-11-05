@@ -5,8 +5,8 @@
 //
 //   node <skill>/scripts/hero-compare.mjs <before-dir> <after-dir> [--out report.html]
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import { basename, dirname, join, resolve } from "node:path";
 
 const args = process.argv.slice(2);
 const [beforeDir, afterDir] = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--out");
@@ -14,14 +14,23 @@ if (!beforeDir || !afterDir) { console.error("usage: hero-compare.mjs <before-di
 const outFile = resolve(args.includes("--out") ? args[args.indexOf("--out") + 1] : join(afterDir, "report.html"));
 const load = (d) => JSON.parse(readFileSync(join(d, "audit.json"), "utf8"));
 const A = load(beforeDir), B = load(afterDir);
-const img = (d, v) => { const f = join(d, `${v}.png`); return existsSync(f) ? `data:image/png;base64,${readFileSync(f).toString("base64")}` : ""; };
+// Screenshots are copied next to the report and linked (not embedded), so the page stays light.
+const img = (d, v, side) => {
+  const f = [`${v}.jpg`, `${v}.png`].map((n) => join(d, n)).find(existsSync);
+  if (!f) return "";
+  const name = `${side}-${basename(f)}`;
+  if (resolve(dirname(outFile), name) !== resolve(f)) copyFileSync(f, join(dirname(outFile), name));
+  return name;
+};
 
-// [label, getter, better: "lower" | "higher" | "none", format]
+// [label, getter, better: "lower" | "higher" | "none", format, noise]: a change smaller than the noise is reported
+// as unchanged (timings vary run to run: 50 ms or 10%, whichever is larger)
 const ms = (v) => (v == null ? "–" : `${v} ms`);
 const METRICS = [
-  ["LCP", (v) => v.perf.lcp?.t, "lower", ms],
-  ["CLS", (v) => v.perf.cls, "lower", (v) => (v == null ? "–" : String(v))],
-  ["First contentful paint", (v) => v.perf.fcp, "lower", ms],
+  ["LCP", (v) => v.perf.lcp?.t, "lower", ms, "time"],
+  ["CLS", (v) => v.perf.cls, "lower", (v) => (v == null ? "–" : String(v)), 0.01],
+  ["First contentful paint", (v) => v.perf.fcp, "lower", ms, "time"],
+  ["Total blocking time", (v) => v.perf.tbt, "lower", ms, "time"],
   ["Render-blocking files", (v) => v.perf.renderBlocking.length, "lower", String],
   ["Headline words", (v) => v.headline?.words, "none", (v) => (v == null ? "no h1" : String(v))],
   ["Headline lines", (v) => v.headline?.lines, "lower", (v) => (v == null ? "–" : String(v))],
@@ -37,10 +46,12 @@ const METRICS = [
 const fails = (r) => r.findings.filter((f) => f.level === "FAIL").length;
 const warns = (r) => r.findings.filter((f) => f.level === "WARN").length;
 
-const rows = (view) => METRICS.map(([label, get, better, fmt]) => {
+const rows = (view) => METRICS.map(([label, get, better, fmt, noise]) => {
   const a = A.views[view] ? get(A.views[view]) : null, b = B.views[view] ? get(B.views[view]) : null;
   let cls = "", note = "";
-  if (a != null && b != null && better !== "none" && a !== b) {
+  const tol = noise === "time" ? Math.max(50, Math.abs(a || 0) * 0.1) : typeof noise === "number" ? noise : 0;
+  if (a != null && b != null && better !== "none" && typeof a === "number" && Math.abs(b - a) <= tol && a !== b) note = "within noise";
+  else if (a != null && b != null && better !== "none" && a !== b) {
     const good = better === "lower" ? b < a : b > a;
     cls = good ? "up" : "down";
     if (typeof a === "number" && typeof b === "number" && a) note = `${good ? "" : ""}${b > a ? "+" : ""}${Math.round(((b - a) / Math.abs(a)) * 100)}%`;
@@ -50,7 +61,9 @@ const rows = (view) => METRICS.map(([label, get, better, fmt]) => {
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const table = (view) => `<table><thead><tr><th>${view}</th><th>Before</th><th>After</th><th></th></tr></thead><tbody>${rows(view).map((r) => `<tr class="${r.cls}"><td>${esc(r.label)}</td><td>${esc(r.a)}</td><td>${esc(r.b)}</td><td>${r.note}</td></tr>`).join("")}</tbody></table>`;
-const shots = (view) => `<div class="pair ${view}"><figure><img src="${img(beforeDir, view)}" alt="Before, ${view}"><figcaption>Before</figcaption></figure><figure><img src="${img(afterDir, view)}" alt="After, ${view}"><figcaption>After</figcaption></figure></div>`;
+const dims = (r, view) => r.views[view]?.viewport || { width: 16, height: 9 };
+const shots = (view) => `<div class="pair ${view}">${[["Before", A, beforeDir, "before"], ["After", B, afterDir, "after"]].map(([label, r, d, side]) =>
+  `<figure><img src="${img(d, view, side)}" width="${dims(r, view).width}" height="${dims(r, view).height}" alt="${label}, ${view} first screen" decoding="async"${view === "phone" ? ' loading="lazy"' : ""}><figcaption>${label}</figcaption></figure>`).join("")}</div>`;
 
 const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hero revamp: before and after</title>
 <style>
@@ -64,11 +77,11 @@ figure{margin:0}figure img{width:100%;height:auto;display:block;border-radius:10
 table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:18px}
 th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}th{font-size:13px;color:var(--muted);font-weight:600;text-transform:capitalize}
 tr.up td:nth-child(3){color:var(--up);font-weight:600}tr.down td:nth-child(3){color:var(--down);font-weight:600}td:last-child{color:var(--muted);font-size:13px}
-tr.up td:last-child::before{content:"better ";}tr.down td:last-child::before{content:"worse ";}
+tr.up td:last-child::before{content:"better ";}tr.down td:last-child::before{content:"worse ";}figure img{height:auto}
 @media (max-width:700px){.pair{grid-template-columns:1fr}}
 </style></head><body><main>
 <h1>Hero revamp: before and after</h1>
-<p class="meta">${esc(B.target)} · measured with hero-audit.mjs${B.throttle ? " (throttled: Slow 4G, 4× CPU)" : ""} · ${esc(B.at.slice(0, 16).replace("T", " "))}</p>
+<p class="meta">${esc(B.target)} · measured with hero-audit.mjs${B.throttle ? " on a throttled phone connection (Slow 4G, 4× CPU)" : " (unthrottled: timings are only indicative)"}${B.views.desktop?.perf.runs ? `, median of ${B.views.desktop.perf.runs.length} loads` : ""} · ${esc(B.at.slice(0, 10))}</p>
 <div class="score"><div>Failures<b>${fails(A)} → ${fails(B)}</b></div><div>Warnings<b>${warns(A)} → ${warns(B)}</b></div><div>Desktop LCP<b>${ms(A.views.desktop?.perf.lcp?.t)} → ${ms(B.views.desktop?.perf.lcp?.t)}</b></div></div>
 <h2>Desktop</h2>${shots("desktop")}${table("desktop")}
 <h2>Phone</h2>${shots("phone")}${table("phone")}

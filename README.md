@@ -4,10 +4,9 @@ An agent skill (for Claude Code, Cursor and other agents that read `SKILL.md`) t
 website hero in React / Next.js + Tailwind, so it reads in seconds, looks like the product instead of a
 template, loads fast, and **proves it with before/after measurements**.
 
-**[See the report it produces](https://sridhar-raj.github.io/hero-revamp/)**: a typical problem hero
-([before](https://sridhar-raj.github.io/hero-revamp/demo/before.html)) audited, rebuilt
-([after](https://sridhar-raj.github.io/hero-revamp/demo/after.html)), audited again: 5 failures → 0,
-33 warnings → 0.
+**[See three measured rebuilds](https://sridhar-raj.github.io/hero-revamp/)**: an invoicing SaaS, a running app and a
+developer CLI, each taken from the usual template hero to a rebuilt one. On a throttled phone connection the
+largest paint drops from about 1.1-1.4 s to 0.22-0.24 s, and every case goes from 4 failures and 16 warnings to none.
 
 ## How it works
 
@@ -54,6 +53,12 @@ audit warns when it sees a dev server.
 | `references/evidence.md` | Every rule with its source, tagged verified / standard / opinion / unverified (popular claims with no primary source are listed so nobody repeats them) |
 | `references/patterns.md` | Archetypes and measured type, CTA and motion numbers from 14 live heroes (Linear, Vercel, Stripe, Raycast, Cursor, Resend, Framer, Clerk, Notion, Figma, Anthropic, Dia, Apple, Supabase) |
 | `references/nextjs.md` | Next.js 16 + Tailwind v4: images (`priority` is deprecated), fonts, video, WebGL, CLS, `svh`, codemods |
+
+## OriginKit (optional, your own account)
+
+The visual slot can be an OriginKit component, fetched with **your own** account: `npx originkit login` (browser
+sign-in) and `npx originkit add <slug>`, or the OriginKit MCP with your key. Adding spends your quota. Nothing from
+OriginKit ships in this repo.
 
 ## References it can research
 

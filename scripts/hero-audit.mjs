@@ -12,7 +12,7 @@
 //   --runs N    load each view N times and report the median LCP / CLS / TBT / FCP (use 5 for before/after proof)
 // Measure a production build (next build && next start): next dev inflates LCP and long tasks; the audit warns.
 //
-// Writes <out>/audit.json (read by hero-compare.mjs), desktop.png and phone.png. Prints PASS / WARN / FAIL lines.
+// Writes <out>/audit.json (read by hero-compare.mjs), desktop.jpg and phone.jpg. Prints PASS / WARN / FAIL lines.
 // Needs Playwright (Chromium) in the current project. Exit code 1 when anything is FAIL.
 
 import { createRequire } from "node:module";
@@ -189,7 +189,7 @@ for (const [view, vp] of Object.entries(SIZES)) {
  const perfRuns = [];
  for (let run = 0; run < runs; run++) {
   const last = run === runs - 1;
-  const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: view === "phone" ? 3 : 2, isMobile: view === "phone", hasTouch: view === "phone" });
+  const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, isMobile: view === "phone", hasTouch: view === "phone" });
   const page = await ctx.newPage();
   await page.addInitScript(OBSERVE);
   if (throttle) {
@@ -242,7 +242,7 @@ for (const [view, vp] of Object.entries(SIZES)) {
   await page.emulateMedia({ reducedMotion: "no-preference" });
 
   await page.evaluate(() => scrollTo(0, 0));
-  await page.screenshot({ path: join(outDir, `${view}.png`) });
+  await page.screenshot({ path: join(outDir, `${view}.jpg`), type: "jpeg", quality: 78 });   // JPEG: a report with four screenshots stays light
   report.views[view] = { viewport: vp, loadMs, bytes, perf, ...insp, headlineContrast, motion };
   await ctx.close();
  }
@@ -334,5 +334,5 @@ writeFileSync(join(outDir, "audit.json"), JSON.stringify(report, null, 2));
 const order = { FAIL: 0, WARN: 1, INFO: 2, PASS: 3 };
 for (const f of [...findings].sort((a, b) => order[a.level] - order[b.level])) console.log(`${f.level.padEnd(4)}  ${f.view.padEnd(7)} ${f.msg}`);
 const fails = findings.filter((f) => f.level === "FAIL").length, warns = findings.filter((f) => f.level === "WARN").length;
-console.log(`\n${fails} fail, ${warns} warn. Wrote ${join(outDir, "audit.json")}, desktop.png, phone.png`);
+console.log(`\n${fails} fail, ${warns} warn. Wrote ${join(outDir, "audit.json")}, desktop.jpg, phone.jpg`);
 process.exitCode = fails ? 1 : 0;

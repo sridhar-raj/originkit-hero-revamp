@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patchwork: small fixes, merged while you sleep</title><meta name="description" content="A made-up product for the hero-revamp demo.">
+<style>
+  :root{--ground:#0c0d10;--ink:#f1f2f4;--muted:#9da3ad;--line:#262931;--term:#13151a;--hl:#24346b;--acc:#f5b14c}
+  *{box-sizing:border-box} body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  nav{display:flex;align-items:center;gap:26px;padding:22px clamp(20px,5vw,72px);font-size:15px}
+  nav b{font-size:18px;letter-spacing:-.02em;margin-right:auto} nav a{color:var(--muted);text-decoration:none}
+  .hero{min-height:calc(100svh - 70px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(28px,5vw,72px);padding:0 clamp(20px,5vw,72px) 40px}
+  h1{font-size:clamp(2.5rem,1.6rem + 3.4vw,4.5rem);line-height:1;letter-spacing:-.04em;font-weight:650;margin:0;text-wrap:balance}
+  .sub{max-width:33rem;color:var(--muted);margin:22px 0 30px;font-size:clamp(17px,1.2vw,19px)}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  button{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 20px;border-radius:12px;font-weight:600}
+  .copy{background:var(--ink);color:#0c0d10;border:0} .copy2{background:#1a1c22;color:var(--ink);border:1px solid var(--line)}
+  button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+  .proof{margin-top:28px;font-size:15px;color:var(--muted)} .proof b{color:var(--ink)}
+  .term{background:var(--term);border:1px solid var(--line);border-radius:16px;overflow:hidden;font:14px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace}
+  .tabs{display:flex;border-bottom:1px solid var(--line);font:15px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .tabs span{padding:14px 20px;color:var(--muted)} .tabs span:first-child{color:var(--ink);background:#1a1c22;border-right:1px solid var(--line)}
+  pre{margin:0;padding:22px;white-space:pre-wrap;color:#c9ced6} .d{color:var(--muted)} mark{background:var(--hl);color:#e9eeff;padding:2px 0}
+  footer{padding:0 clamp(20px,5vw,72px) 24px;font-size:13px;color:var(--muted)}
+  @media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:8px} nav a{display:none}}
+</style></head><body>
+<nav><b>Patchwork</b><a href="#">Docs</a><a href="#">Pricing</a></nav>
+<section class="hero">
+  <div>
+    <h1>Small fixes, merged while you sleep.</h1>
+    <p class="sub">Point your coding agent at Patchwork and it picks up flaky tests, lint and dependency bumps overnight, then opens one tidy pull request for you to review.</p>
+    <div class="ctas"><button class="copy" data-copy="Install Patchwork and fix tonight's flaky tests and lint. Open one PR.">Copy the prompt</button><button class="copy2" data-copy="npm i -g patchwork-cli">Copy the install command</button></div>
+    <p class="proof"><b>31,000 pull requests</b> merged by teams last month</p>
+  </div>
+  <div class="term" role="img" aria-label="Terminal: installing Patchwork, then a prompt asking the agent to fix flaky tests and lint and open one pull request">
+    <div class="tabs"><span>Terminal</span><span>patchwork.toml</span></div>
+<pre><span class="d">$</span> npm i -g patchwork-cli
+<span class="d">✓ installed patchwork 2.4.0</span>
+
+<span class="d">&gt;</span> <mark>Install Patchwork and fix tonight's flaky tests and lint. Open one PR.</mark>
+
+<span class="d">● 3 flaky tests found · 14 lint fixes · PR #482 ready for review</span></pre>
+  </div>
+</section>
+<footer>Patchwork is a made-up product for the hero-revamp demo.</footer>
+<script>for(const b of document.querySelectorAll("[data-copy]"))b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const t=b.textContent;b.textContent="Copied";setTimeout(()=>b.textContent=t,1600)}catch{}})</script>
+</body></html>
