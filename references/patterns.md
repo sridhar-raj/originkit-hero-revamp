@@ -22,7 +22,7 @@ Pick the one the product's truth supports. Each lists what it needs and how it u
 | 8 | **Kinetic headline** | Notion (word pill), Framer (per-letter blur) | multi-use products ("for X, Y, Z") | one animated slot, width tweened (~300 ms) or fixed, stable layout | typewriter, layout shift, cycles under 2 s |
 | 9 | **Split, asymmetric** | Resend, Vercel (3 columns) | most B2B | copy ~40%, visual ~60%; a third column only for tiny claims | the 50/50 "text left, illustration right" template |
 | 10 | **Quiet small type** | Cursor (26 px h1), Apple (28 px h1 eyebrow) | confident, well-known brands | a strong visual underneath, generous space above | small type over a weak visual = unfinished |
-| + | **Agent-native CTA** (modifier) | Clerk ("Copy prompt"), Framer ("Get the MCP") | dev tools in 2026 | one primary action that hands off to the visitor's agent | used where the audience isn't developers |
+| + | **Agent-native CTA** (modifier) | Clerk ("Copy prompt"), Framer ("Get the MCP"), design-file galleries ("Copy the prompt" + "Copy the curl command" beside a tabbed Terminal / DESIGN.md preview) | dev tools and agent-facing products in 2026 | one primary action that hands off to the visitor's agent: a filled "Copy the prompt", a weaker "Copy the command", and a preview of exactly what gets copied (a terminal block with the prompt highlighted); a copied-state confirmation | used where the audience isn't developers; a copy button with no visible preview of what it copies |
 
 **In this studio** the visual slot is usually an OriginKit component (a WebGL background, a 3D object, a text
 effect) inside a real product surface: archetypes 4, 5, 6 and 2 map onto it directly. See SKILL.md, studio notes.
