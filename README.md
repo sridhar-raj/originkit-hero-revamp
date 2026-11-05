@@ -55,6 +55,12 @@ audit warns when it sees a dev server.
 | `references/patterns.md` | Archetypes and measured type, CTA and motion numbers from 14 live heroes (Linear, Vercel, Stripe, Raycast, Cursor, Resend, Framer, Clerk, Notion, Figma, Anthropic, Dia, Apple, Supabase) |
 | `references/nextjs.md` | Next.js 16 + Tailwind v4: images (`priority` is deprecated), fonts, video, WebGL, CLS, `svh`, codemods |
 
+## References it can research
+
+- [Refero](https://refero.design) (real product screens and styles) through its MCP, when connected (paid plan).
+- [GradientDeck](https://ui.gradientdeck.com) (free `DESIGN.md` files from 1,286 real sites) as a starting
+  direction when a project has no design system, adapted rather than cloned, with unlicensed fonts swapped.
+
 ## Works well with
 
 [blur-craft](https://github.com/sridhar-raj/blur-craft) for glass and text over imagery, and, if you use them,
