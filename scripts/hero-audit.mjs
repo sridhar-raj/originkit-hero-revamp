@@ -47,7 +47,19 @@ const add = (level, view, msg) => findings.push({ level, view, msg });
 
 // Runs before any page script: records LCP candidates and layout shifts from the very first paint.
 const OBSERVE = () => {
-  window.__hr = { lcp: [], cls: 0, shifts: [], longTasks: [] };
+  window.__hr = { lcp: [], cls: 0, shifts: [], longTasks: [], ctaVisibleAt: null };
+  // When do the hero's actions become fully visible? Sample the links/buttons near the first h1 every 100 ms.
+  const t0 = performance.now();
+  const tick = setInterval(() => {
+    const h = document.querySelector("h1");
+    if (!h) return;
+    const scope = h.closest("section, header, main") || h.parentElement;
+    const acts = [...scope.querySelectorAll("a, button")].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 40 && r.height > 24 && r.top < innerHeight; });
+    if (!acts.length) return;
+    const op = (el) => { let o = 1; for (let a = el; a; a = a.parentElement) o *= Number(getComputedStyle(a).opacity); return o; };
+    if (acts.every((a) => op(a) >= 0.95)) { window.__hr.ctaVisibleAt = Math.round(performance.now()); clearInterval(tick); }
+    if (performance.now() - t0 > 15000) clearInterval(tick);
+  }, 100);
   try {
     new PerformanceObserver((l) => {
       for (const e of l.getEntries()) {
@@ -78,7 +90,15 @@ const INSPECT = (sel) => {
   // headline: the first-screen h1; without one, the largest heading in the first screen (still flagged)
   const h1 = h1s.find(inFirstScreen) || null;
   const h = h1 || [...document.querySelectorAll("h2, h3, [role=heading]")].filter((e) => visible(e) && inFirstScreen(e)).sort((a, b) => parseFloat(cs(b).fontSize) - parseFloat(cs(a).fontSize))[0] || null;
-  const lines = (el) => { const range = document.createRange(); range.selectNodeContents(el); const tops = new Set([...range.getClientRects()].filter((r) => r.width > 2).map((r) => Math.round(r.top))); return tops.size; };
+  // rendered lines: height / line-height (robust to per-letter spans and stacked rotating words); falls back to
+  // counting distinct line boxes when line-height is "normal"
+  const lines = (el) => {
+    const lh = parseFloat(cs(el).lineHeight), h = el.getBoundingClientRect().height;
+    if (lh > 0) return Math.max(1, Math.round(h / lh));
+    const range = document.createRange(); range.selectNodeContents(el);
+    return new Set([...range.getClientRects()].filter((r) => r.width > 2).map((r) => Math.round(r.top))).size;
+  };
+  const opacityOf = (el) => { let o = 1; for (let a = el; a; a = a.parentElement) o *= Number(cs(a).opacity); return +o.toFixed(2); };
   const headline = h ? {
     tag: h.tagName.toLowerCase(), isH1: !!h1,
     text: h.textContent.trim().replace(/\s+/g, " "), words: h.textContent.trim().split(/\s+/).length, chars: h.textContent.trim().length,
@@ -92,7 +112,7 @@ const INSPECT = (sel) => {
     const scope = hero || document.body;
     const ps = [...scope.querySelectorAll("p")].filter((p) => visible(p) && inFirstScreen(p) && (h.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING) && p.textContent.trim().split(/\s+/).length >= 6);
     const p = ps[0];
-    if (p) { const r = p.getBoundingClientRect(); const fs = parseFloat(cs(p).fontSize); sub = { text: p.textContent.trim().replace(/\s+/g, " ").slice(0, 220), words: p.textContent.trim().split(/\s+/).length, fontSize: fs, lines: lines(p), charsPerLine: Math.round(p.textContent.trim().length / Math.max(1, lines(p))), bottom: Math.round(r.bottom) }; }
+    if (p) { const r = p.getBoundingClientRect(); const fs = parseFloat(cs(p).fontSize); sub = { opacity: opacityOf(p), text: p.textContent.trim().replace(/\s+/g, " ").slice(0, 220), words: p.textContent.trim().split(/\s+/).length, fontSize: fs, lines: lines(p), charsPerLine: Math.round(p.textContent.trim().length / Math.max(1, lines(p))), bottom: Math.round(r.bottom) }; }
   }
 
   // CTAs: links and buttons in the first screen that look like buttons (padding + background or border)
@@ -115,7 +135,7 @@ const INSPECT = (sel) => {
   }).map((el) => {
     const r = el.getBoundingClientRect(), s = cs(el), bg = bgOf(el), fg = toRgb(s.color);
     const ghost = toRgb(s.backgroundColor)[3] < 0.3 && s.backgroundImage === "none";   // outline only: reads as weak (NN/g)
-    return { label: el.textContent.trim().replace(/\s+/g, " "), w: Math.round(r.width), h: Math.round(r.height), top: Math.round(r.top), bottom: Math.round(r.bottom),
+    return { opacity: opacityOf(el), label: el.textContent.trim().replace(/\s+/g, " "), w: Math.round(r.width), h: Math.round(r.height), top: Math.round(r.top), bottom: Math.round(r.bottom),
       contrast: bg ? ratio(fg, bg) : null, fontSize: parseFloat(s.fontSize), ghost };
   });
 
@@ -222,12 +242,12 @@ for (const [view, vp] of Object.entries(SIZES)) {
     const f = fcp ? fcp.startTime : 0;
     const tbt = Math.round(h.longTasks.filter((t) => t.s > f).reduce((a, t) => a + Math.max(0, t.d - 50), 0));
     const dev = !!document.querySelector("nextjs-portal, [data-nextjs-toast], script[src*='react-refresh'], script[src*='webpack-hmr']") || !!window.__NEXT_HMR_CB || /turbopack-hmr|_next\/static\/chunks\/.*hmr/.test([...document.scripts].map((s) => s.src).join(" "));
-    return { lcp: last, lcpInFirstScreen: el ? el.getBoundingClientRect().top < innerHeight : null, cls: +h.cls.toFixed(3), shifts: h.shifts.slice(0, 8),
+    return { ctaVisibleAt: h.ctaVisibleAt, lcp: last, lcpInFirstScreen: el ? el.getBoundingClientRect().top < innerHeight : null, cls: +h.cls.toFixed(3), shifts: h.shifts.slice(0, 8),
       fcp: fcp ? Math.round(fcp.startTime) : null, ttfb: nav ? Math.round(nav.responseStart) : null, tbt, renderBlocking: blocking, dev };
   });
   perfRuns.push(perf);
   if (!last) { await ctx.close(); continue; }
-  if (runs > 1) perf = { ...perf, lcp: perf.lcp && { ...perf.lcp, t: median(perfRuns.map((p) => p.lcp?.t)) }, cls: median(perfRuns.map((p) => p.cls)), tbt: median(perfRuns.map((p) => p.tbt)), fcp: median(perfRuns.map((p) => p.fcp)), runs: perfRuns.map((p) => ({ lcp: p.lcp?.t, cls: p.cls, tbt: p.tbt })) };
+  if (runs > 1) perf = { ...perf, ctaVisibleAt: median(perfRuns.map((p) => p.ctaVisibleAt)), lcp: perf.lcp && { ...perf.lcp, t: median(perfRuns.map((p) => p.lcp?.t)) }, cls: median(perfRuns.map((p) => p.cls)), tbt: median(perfRuns.map((p) => p.tbt)), fcp: median(perfRuns.map((p) => p.fcp)), runs: perfRuns.map((p) => ({ lcp: p.lcp?.t, cls: p.cls, tbt: p.tbt })) };
   const insp = await page.evaluate(INSPECT, selector);
   const headlineContrast = await textContrast(page, "h1");
 
@@ -278,6 +298,7 @@ for (const [view, v] of Object.entries(report.views)) {
   } else add("WARN", view, "no LCP entry recorded");
   add(p.cls > 0.25 ? "FAIL" : p.cls > 0.1 ? "WARN" : "PASS", view, `CLS ${p.cls}`);
   if (p.tbt != null) add(p.tbt > 600 ? "FAIL" : p.tbt > 200 ? "WARN" : "PASS", view, `total blocking time ${p.tbt} ms${runs > 1 ? ` (median of ${runs})` : ""}`);
+  if (p.ctaVisibleAt != null && p.fcp != null && p.ctaVisibleAt - p.fcp > 1000) add("WARN", view, `the hero's actions become fully visible ${p.ctaVisibleAt - p.fcp} ms after first paint (an entrance fade): visitors wait to see what to do. Show them at once`);
   if (p.dev) add("WARN", view, "this looks like a dev server (next dev): LCP and blocking time are inflated. Measure next build && next start for real numbers");
   if (p.lcp && p.lcp.tag === "h1" && p.fcp != null && p.lcp.t - p.fcp > 600) add("WARN", view, `the headline is the LCP and paints ${p.lcp.t - p.fcp} ms after first paint: an entrance animation starting at opacity 0 holds LCP back. Start it visible, animate transform only`);
   if (p.renderBlocking.length) add("WARN", view, `render-blocking: ${p.renderBlocking.slice(0, 4).join(", ")}${p.renderBlocking.length > 4 ? ", …" : ""}`);
@@ -296,6 +317,8 @@ for (const [view, v] of Object.entries(report.views)) {
       add(v.headlineContrast < need ? "FAIL" : "PASS", view, `headline contrast over its backdrop (2nd-percentile pixel) ${v.headlineContrast}:1, needs ${need}:1`);
     }
   }
+  if (v.ctas[0] && v.ctas[0].opacity < 0.9) add("WARN", view, `primary CTA "${v.ctas[0].label}" is still fading in (opacity ${v.ctas[0].opacity}) ${Math.round(v.loadMs / 100) / 10} s after load: show the action at once; animate the visual instead`);
+  if (v.sub && v.sub.opacity < 0.9) add("WARN", view, `the subhead is still fading in (opacity ${v.sub.opacity}) when measured`);
   if (!v.sub) add("WARN", view, "no subhead found under the headline: one plain sentence should say what it is and for whom");
   else {
     if (v.sub.words > 30) add("WARN", view, `subhead ${v.sub.words} words: aim for one sentence, ~25 words or fewer`);

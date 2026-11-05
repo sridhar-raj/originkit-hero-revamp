@@ -31,6 +31,7 @@ const METRICS = [
   ["CLS", (v) => v.perf.cls, "lower", (v) => (v == null ? "–" : String(v)), 0.01],
   ["First contentful paint", (v) => v.perf.fcp, "lower", ms, "time"],
   ["Total blocking time", (v) => v.perf.tbt, "lower", ms, "time"],
+  ["Actions fully visible after", (v) => v.perf.ctaVisibleAt, "lower", ms, "time"],
   ["Render-blocking files", (v) => v.perf.renderBlocking.length, "lower", String],
   ["Headline words", (v) => v.headline?.words, "none", (v) => (v == null ? "no h1" : String(v))],
   ["Headline lines", (v) => v.headline?.lines, "lower", (v) => (v == null ? "–" : String(v))],
