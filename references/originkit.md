@@ -41,7 +41,8 @@ about the product (water caustics for a sea-freight tracker, a data-pixel arc fo
 dodecahedron for a dev tool about many sides of one system). Everything else stays quiet. Optional second and
 third pieces: a text effect on one word, a distinctive primary button. Never three loud components competing.
 Wire its props to the product's state where you can (hover, selected industry, live numbers), so it's part of
-the product, not decoration.
+the product, not decoration. The component is the material; what it does is the signature moment, designed
+with `signature.md`.
 
 ## The modern-and-unique bar
 
@@ -57,7 +58,8 @@ A rebuild fails review if any of these are true:
 
 And it should have: one signature visual, one decisive type choice (a display face or a deliberate weight and
 tracking), colour taken from the product or its design system, and at least one moment that answers the
-visitor (hover, a choice, a live value). Run **taste-skill** / **frontend-design** for direction and
+visitor (hover, a choice, a live value). The full taste review (template tells with alternatives, the swap
+and density tests, depth details) is in `craft.md`. Run **taste-skill** / **frontend-design** for direction and
 **impeccable** `critique` on the result.
 
 ## Build rules

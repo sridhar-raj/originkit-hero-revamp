@@ -1,43 +1,168 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Patchwork: small fixes, merged while you sleep</title><meta name="description" content="A made-up product for the hero-revamp demo.">
+<link rel="preload" href="assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root{--ground:#0c0d10;--ink:#f1f2f4;--muted:#9da3ad;--line:#262931;--term:#13151a;--hl:#24346b;--acc:#f5b14c}
-  *{box-sizing:border-box} body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  nav{display:flex;align-items:center;gap:26px;padding:22px clamp(20px,5vw,72px);font-size:15px}
-  nav b{font-size:18px;letter-spacing:-.02em;margin-right:auto} nav a{color:var(--muted);text-decoration:none}
-  .hero{min-height:calc(100svh - 70px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(28px,5vw,72px);padding:0 clamp(20px,5vw,72px) 40px}
-  h1{font-size:clamp(2.5rem,1.6rem + 3.4vw,4.5rem);line-height:1;letter-spacing:-.04em;font-weight:650;margin:0;text-wrap:balance}
-  .sub{max-width:33rem;color:var(--muted);margin:22px 0 30px;font-size:clamp(17px,1.2vw,19px)}
-  .ctas{display:flex;gap:12px;flex-wrap:wrap}
-  button{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 20px;border-radius:12px;font-weight:600}
-  .copy{background:var(--ink);color:#0c0d10;border:0} .copy2{background:#1a1c22;color:var(--ink);border:1px solid var(--line)}
-  button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
-  .proof{margin-top:28px;font-size:15px;color:var(--muted)} .proof b{color:var(--ink)}
-  .term{background:var(--term);border:1px solid var(--line);border-radius:16px;overflow:hidden;font:14px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace}
-  .tabs{display:flex;border-bottom:1px solid var(--line);font:15px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  .tabs span{padding:14px 20px;color:var(--muted)} .tabs span:first-child{color:var(--ink);background:#1a1c22;border-right:1px solid var(--line)}
-  pre{margin:0;padding:22px;white-space:pre-wrap;color:#c9ced6} .d{color:var(--muted)} mark{background:var(--hl);color:#e9eeff;padding:2px 0}
-  footer{padding:0 clamp(20px,5vw,72px) 24px;font-size:13px;color:var(--muted)}
-  @media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:8px} nav a{display:none}}
+  @font-face{font-family:"Schibsted Grotesk";src:url(assets/fonts/schibsted-grotesk.woff2) format("woff2");font-weight:400 800;font-display:swap}
+  @font-face{font-family:"JetBrains Mono";src:url(assets/fonts/jetbrains-mono.woff2) format("woff2");font-weight:400 700;font-display:swap}
+  @font-face{font-family:"Schibsted Fallback";src:local("Arial");size-adjust:98%;ascent-override:98%}
+  :root{--night:#0a0c12;--ink:#f1efe9;--muted:#9ea3ae;--line:#242833;--line2:#1b1e27;--term:#0f1218;--card:#14171f;--moon:#f2c46d;--green:#4cc38a;--red:#f07a6a;--blue:#8fb3ff}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--night);color:var(--ink);font:16px/1.5 "Schibsted Grotesk","Schibsted Fallback",system-ui,sans-serif}
+  .m{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-ligatures:none}
+  a{color:inherit}
+  nav{display:flex;align-items:center;gap:28px;height:70px;padding:0 clamp(20px,4.5vw,64px);font-size:15px;position:relative;z-index:3}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em;margin-right:auto;text-decoration:none}
+  .brand svg{width:22px;height:22px}
+  nav a.l{color:var(--muted);text-decoration:none} nav a.l:hover{color:var(--ink)}
+  nav .gh{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:9px}
+  nav .gh b{font-weight:600;color:var(--moon)}
+
+  .hero{position:relative;min-height:calc(100svh - 70px);max-height:980px;padding:0 clamp(20px,4.5vw,64px);overflow:clip;isolation:isolate;display:flex;flex-direction:column}
+  /* a quilt: the night's fixes, stitched into a grid */
+  .quilt{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line2) 1px,transparent 1px),linear-gradient(90deg,var(--line2) 1px,transparent 1px);background-size:64px 64px;background-position:-1px -1px;-webkit-mask:radial-gradient(90% 70% at 70% 0%,#000,transparent 75%);mask:radial-gradient(90% 70% at 70% 0%,#000,transparent 75%)}
+  .quilt i{position:absolute;width:63px;height:63px;border:1px dashed rgb(242 196 109 / .22);background:rgb(242 196 109 / .03)}
+  .head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end;padding:clamp(28px,6vh,72px) 0 clamp(28px,5vh,52px)}
+  h1{font-size:clamp(2.75rem,1.3rem + 4vw,5.1rem);font-weight:700;line-height:.98;letter-spacing:-.045em;margin:0;text-wrap:balance}
+  h1 span{color:var(--moon)}
+  .sub{color:var(--muted);margin:0 0 24px;font-size:clamp(16.5px,1.2vw,18px);line-height:1.5;max-width:31rem}
+  .ctas{display:flex;gap:10px;flex-wrap:wrap}
+  button{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 18px;border-radius:11px;font-weight:600;font-size:15.5px;transition:transform .2s cubic-bezier(.22,1,.36,1),background-color .2s}
+  button svg{width:16px;height:16px;flex:none}
+  button:hover{transform:translateY(-1px)}
+  .copy{background:var(--ink);color:#0a0c12;border:0;box-shadow:0 10px 28px -12px rgb(242 196 109 / .45)}
+  .copy2{background:#161a22;color:var(--ink);border:1px solid #2c313d}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--moon);outline-offset:3px}
+  .proof{margin:18px 0 0;font-size:14px;color:var(--muted)} .proof b{color:var(--ink);font-weight:600}
+
+  /* the night's run: terminal, then the pull request it opened */
+  .stage{position:relative;flex:1;min-height:500px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:0}
+  .term{position:relative;background:var(--term);border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0;font-size:13px;line-height:1.75;overflow:hidden;box-shadow:0 -1px 0 rgb(255 255 255 / .04) inset,0 40px 80px -30px rgb(0 0 0 / .8);margin-right:-48px;height:560px}
+  .tabs{display:flex;align-items:center;border-bottom:1px solid var(--line);font:13px/1 "Schibsted Grotesk",sans-serif;color:var(--muted)}
+  .tabs span{padding:12px 16px;border-right:1px solid var(--line)} .tabs span.on{color:var(--ink);background:#161a22}
+  .tabs em{margin-left:auto;padding-right:16px;font-style:normal;font-size:12px}
+  pre{margin:0;padding:16px 20px 20px;white-space:pre-wrap;color:#c8ccd4;font:inherit}
+  pre .ln{display:flex;gap:12px;transition:opacity .3s}
+  pre .ln>span:last-child{flex:1;min-width:0}
+  .t{width:5ch}
+  pre .ln.wait{opacity:0}
+  .d{color:#6f7582} .t{color:#6f7582;flex:none} .g{color:var(--green)} .y{color:var(--moon)} .r{color:var(--red)} .b{color:var(--blue)}
+  mark{background:rgb(242 196 109 / .16);color:#fbe7bf;padding:2px 4px;border-radius:4px;box-shadow:inset 2px 0 0 var(--moon)}
+  .cur{display:inline-block;width:8px;height:15px;background:var(--moon);vertical-align:-2px;animation:blink 1.1s steps(1) 6}
+  @keyframes blink{50%{opacity:0}}
+
+  .pr{position:relative;z-index:2;align-self:start;margin-top:56px;background:var(--card);border:1px solid #2c313d;border-radius:14px;box-shadow:0 1px 0 rgb(255 255 255 / .05) inset,0 50px 90px -30px rgb(0 0 0 / .9),0 0 0 6px rgb(10 12 18 / .6);font-size:13.5px;overflow:hidden}
+  .pr .top{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+  .pr .ttl{display:flex;gap:10px;align-items:flex-start;font-size:16px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+  .open{flex:none;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:99px;background:rgb(76 195 138 / .15);color:var(--green);font-size:12px;font-weight:600;margin-top:-1px}
+  .open svg{width:12px;height:12px}
+  .pr .ttl small{color:var(--muted);font-weight:400}
+  .pr .by{margin-top:6px;color:var(--muted);font-size:12.5px} .pr .by code{font-size:11.5px;background:#1d2230;color:#b9c6e8;padding:1px 6px;border-radius:5px}
+  .files{padding:10px 18px;border-bottom:1px solid var(--line);display:grid;gap:5px;font-size:12.5px}
+  .files .sum{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:2px}
+  .f{display:grid;grid-template-columns:minmax(0,1fr) 56px 46px;gap:10px;align-items:center}
+  .f span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d6d9df}
+  .f .n{text-align:right;font-size:12px}
+  .bars{display:flex;gap:2px}.bars i{width:8px;height:8px;border-radius:2px;background:#2a2f3a}.bars .a{background:var(--green)}.bars .x{background:var(--red)}
+  .checks{padding:8px 18px 10px;display:grid;gap:2px}
+  .ck{display:flex;align-items:center;gap:10px;height:30px;font-size:13px;color:#d6d9df}
+  .ck .ic{width:16px;height:16px;flex:none;position:relative}
+  .ck .ic::before{content:"";position:absolute;inset:1px;border-radius:50%;border:2px solid rgb(242 196 109 / .25);border-top-color:var(--moon);animation:spin .9s linear infinite}
+  .ck.ok .ic::before{animation:none;border:0;background:var(--green)}
+  .ck.ok .ic::after{content:"";position:absolute;left:5px;top:3.5px;width:4px;height:7px;border:solid #0c1a12;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .ck em{margin-left:auto;font-style:normal;color:var(--muted);font-size:12px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.ck .ic::before,.cur{animation:none}}
+  .merge{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid var(--line);background:#11141b;font-size:13px;color:var(--muted)}
+  .merge b{color:var(--ink);font-weight:600}
+  .merge .st{flex:1;transition:opacity .3s}
+  .merge .rm{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:8px;background:#22372b;color:#8fd9b2;font-weight:600;font-size:13px;white-space:nowrap;transition:background-color .4s,color .4s}
+  .merge .rm.go{background:var(--green);color:#08130d}
+  .rev{display:flex;align-items:center;gap:8px;padding:0 18px 12px;font-size:12.5px;color:var(--muted)}
+  .av{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:9.5px;font-weight:700;color:#0a0c12}
+  footer{padding:14px clamp(20px,4.5vw,64px);font-size:13px;color:var(--muted);border-top:1px solid var(--line2)}
+
+  @media (max-width:1000px){.head{grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}.sub{max-width:36rem}.stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.term{margin-right:-120px}}
+  @media (max-width:760px){
+    nav{height:60px} nav a.l{display:none}
+    .head{padding:12px 0 28px}
+    .ctas button{flex:1 1 100%;justify-content:center}
+    .stage{grid-template-columns:minmax(0,1fr);min-height:0}
+    .term{margin-right:0;height:330px;font-size:12px;line-height:1.7}
+    .t,.hide-s,.tabs em{display:none}
+    pre{padding:14px}
+    .pr{margin:-120px 10px 0}
+    .hero{max-height:none}
+  }
 </style></head><body>
-<nav><b>Patchwork</b><a href="#">Docs</a><a href="#">Pricing</a></nav>
+<nav aria-label="Main"><a class="brand" href="#"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="9" height="9" rx="2" fill="#f2c46d"/><rect x="12" y="1" width="9" height="9" rx="2" fill="none" stroke="#f1efe9" stroke-width="1.4" stroke-dasharray="2 1.6"/><rect x="1" y="12" width="9" height="9" rx="2" fill="none" stroke="#f1efe9" stroke-width="1.4" stroke-dasharray="2 1.6"/><rect x="12" y="12" width="9" height="9" rx="2" fill="#f1efe9"/></svg>Patchwork</a><a class="l" href="#">Docs</a><a class="l" href="#">Pricing</a><a class="l" href="#">Changelog</a><a class="gh" href="#"><span aria-hidden="true">★</span><b>8.4k</b> on GitHub</a></nav>
+<main>
 <section class="hero">
-  <div>
-    <h1>Small fixes, merged while you sleep.</h1>
-    <p class="sub">Point your coding agent at Patchwork and it picks up flaky tests, lint and dependency bumps overnight, then opens one tidy pull request for you to review.</p>
-    <div class="ctas"><button class="copy" data-copy="Install Patchwork and fix tonight's flaky tests and lint. Open one PR.">Copy the prompt</button><button class="copy2" data-copy="npm i -g patchwork-cli">Copy the install command</button></div>
-    <p class="proof"><b>31,000 pull requests</b> merged by teams last month</p>
+  <div class="quilt" aria-hidden="true"><i style="left:63px;top:63px"></i><i style="left:831px;top:127px"></i><i style="left:1151px;top:63px"></i><i style="left:1279px;top:255px"></i><i style="left:575px;top:-1px"></i><i style="left:1023px;top:319px"></i></div>
+  <div class="head">
+    <h1>Small fixes, merged while you <span>sleep.</span></h1>
+    <div>
+      <p class="sub">Point your coding agent at Patchwork and it picks up flaky tests, lint and dependency bumps overnight, then opens one tidy pull request for you to review.</p>
+      <div class="ctas">
+        <button class="copy" type="button" data-copy="Install Patchwork and fix tonight's flaky tests and lint. Open one PR."><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg><span>Copy the prompt</span></button>
+        <button class="copy2" type="button" data-copy="npm i -g patchwork-cli"><span class="m" aria-hidden="true">$</span><span>Copy the install command</span></button>
+      </div>
+      <p class="proof"><b>31,000 pull requests</b> merged by teams last month</p>
+    </div>
   </div>
-  <div class="term" role="img" aria-label="Terminal: installing Patchwork, then a prompt asking the agent to fix flaky tests and lint and open one pull request">
-    <div class="tabs"><span>Terminal</span><span>patchwork.toml</span></div>
-<pre><span class="d">$</span> npm i -g patchwork-cli
-<span class="d">✓ installed patchwork 2.4.0</span>
-
-<span class="d">&gt;</span> <mark>Install Patchwork and fix tonight's flaky tests and lint. Open one PR.</mark>
-
-<span class="d">● 3 flaky tests found · 14 lint fixes · PR #482 ready for review</span></pre>
+  <div class="stage">
+    <div class="term" role="img" aria-label="Terminal: Patchwork installs, takes the prompt, finds three flaky tests, fixes them and fourteen lint errors, bumps two dependencies, verifies twenty green runs and opens pull request 482.">
+      <div class="tabs" aria-hidden="true"><span class="on">Terminal</span><span>patchwork.toml</span><em class="m">harbor-web · main</em></div>
+<pre class="m" id="log" aria-hidden="true"><span class="ln"><span class="t">01:58</span><span><span class="d">$</span> npm i -g patchwork-cli</span></span><span class="ln"><span class="t">01:58</span><span><span class="g">✓ installed patchwork 2.4.0</span></span></span><span class="ln"><span class="t">02:13</span><span><span class="d">&gt;</span> <mark>Install Patchwork and fix tonight's flaky tests and lint. Open one PR.</mark></span></span><span class="ln"><span class="t">02:14</span><span><span class="y">patchwork</span> scanning 1,284 tests in 412 files</span></span><span class="ln"><span class="t">02:16</span><span><span class="r">●</span> flaky  checkout.spec.ts <span class="d hide-s">› applies discount once</span></span></span><span class="ln"><span class="t">02:17</span><span><span class="r">●</span> flaky  search.spec.ts <span class="d hide-s">› debounces input</span></span></span><span class="ln"><span class="t">02:17</span><span><span class="r">●</span> flaky  auth.spec.ts <span class="d hide-s">› refreshes expired token</span></span></span><span class="ln"><span class="t">02:31</span><span><span class="g">✓</span> fixed  3 flaky tests <span class="d hide-s">· fake timers, await idle, clock skew</span></span></span><span class="ln"><span class="t">02:33</span><span><span class="g">✓</span> fixed  14 lint errors in 9 files</span></span><span class="ln"><span class="t">02:36</span><span><span class="g">✓</span> bumped zod 3.24.1, vitest 2.1.8</span></span><span class="ln"><span class="t">03:02</span><span><span class="g">✓</span> 20 of 20 runs green</span></span><span class="ln"><span class="t">03:04</span><span><span class="b">→ opened PR #482</span> <span class="d">patchwork/nightly-1113</span> <span class="cur" id="cur"></span></span></span></pre>
+    </div>
+    <div class="pr" id="pr" role="img" aria-label="Pull request 482 by patchwork-bot: fix 3 flaky tests, 14 lint errors and bump 2 dependencies; 11 files changed; build, unit, end-to-end and lint checks all pass; review requested from Sofia Lindqvist.">
+      <div aria-hidden="true">
+        <div class="top"><div class="ttl"><span class="open"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="3" cy="2.5" r="1.4"/><circle cx="3" cy="9.5" r="1.4"/><circle cx="9" cy="9.5" r="1.4"/><path d="M3 4v4M9 8V6a2 2 0 0 0-2-2H5.5"/></svg>Open</span><span>Fix 3 flaky tests, 14 lint errors, bump 2 dependencies <small>#482</small></span></div>
+        <div class="by">patchwork-bot wants to merge 4 commits into <code class="m">main</code> from <code class="m">patchwork/nightly-1113</code></div></div>
+        <div class="files m"><div class="sum"><span>11 files changed</span><span><span class="g">+146</span> <span class="r">−89</span></span></div>
+          <div class="f"><span>tests/checkout.spec.ts</span><span class="n"><span class="g">+12</span> <span class="r">−4</span></span><span class="bars"><i class="a"></i><i class="a"></i><i class="a"></i><i class="x"></i><i></i></span></div>
+          <div class="f"><span>tests/search.spec.ts</span><span class="n"><span class="g">+8</span> <span class="r">−6</span></span><span class="bars"><i class="a"></i><i class="a"></i><i class="x"></i><i class="x"></i><i></i></span></div>
+          <div class="f"><span>src/auth/refresh-token.ts</span><span class="n"><span class="g">+3</span> <span class="r">−1</span></span><span class="bars"><i class="a"></i><i class="a"></i><i class="a"></i><i class="x"></i><i></i></span></div>
+          <div class="f"><span>package-lock.json</span><span class="n"><span class="g">+98</span> <span class="r">−72</span></span><span class="bars"><i class="a"></i><i class="a"></i><i class="a"></i><i class="x"></i><i class="x"></i></span></div>
+        </div>
+        <div class="checks">
+          <div class="ck" data-t="1m 12s"><span class="ic"></span>build<em>running</em></div>
+          <div class="ck" data-t="3m 40s"><span class="ic"></span>unit tests <span class="d m" style="font-size:12px">1,284</span><em>running</em></div>
+          <div class="ck" data-t="6m 02s"><span class="ic"></span>e2e, Chromium and WebKit<em>running</em></div>
+          <div class="ck" data-t="18s"><span class="ic"></span>lint<em>running</em></div>
+        </div>
+        <div class="rev"><span class="av" style="background:#c7b2f0">SL</span>Review requested from Sofia Lindqvist</div>
+        <div class="merge"><span class="st" id="mst">Checks running…</span><span class="rm" id="rm">Ready to merge</span></div>
+      </div>
+    </div>
   </div>
 </section>
+</main>
 <footer>Patchwork is a made-up product for the hero-revamp demo.</footer>
-<script>for(const b of document.querySelectorAll("[data-copy]"))b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const t=b.textContent;b.textContent="Copied";setTimeout(()=>b.textContent=t,1600)}catch{}})</script>
+<script>
+for (const b of document.querySelectorAll("[data-copy]")) b.addEventListener("click", async () => {
+  const label = b.querySelector("span:last-child"), t = label.textContent;
+  try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = "Copied"; } catch { label.textContent = "Select and copy"; }
+  setTimeout(() => (label.textContent = t), 1600);
+});
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const lines = [...document.querySelectorAll("#log .ln")], checks = [...document.querySelectorAll(".ck")];
+  const pr = document.getElementById("pr");
+  const done = (c) => { c.classList.add("ok"); c.querySelector("em").textContent = c.dataset.t; };
+  const finish = () => { document.getElementById("mst").innerHTML = "<b>All checks have passed</b>"; document.getElementById("rm").classList.add("go"); };
+  const still = () => { timers.forEach(clearTimeout); document.getAnimations().forEach((a) => a.finish()); lines.forEach((l) => l.classList.remove("wait")); pr.style.opacity = ""; checks.forEach(done); finish(); };
+  const timers = [];
+  matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", (e) => e.matches && still());
+  if (reduce) { still(); return; }
+  const ease = "cubic-bezier(.22,1,.36,1)";
+  lines.forEach((l, i) => { if (i > 1) l.classList.add("wait"); });
+  pr.style.opacity = 0;
+  let t = 500;
+  lines.forEach((l, i) => { if (i < 2) return; t += i === 2 ? 0 : i === 3 ? 520 : 200; timers.push(setTimeout(() => { l.classList.remove("wait"); l.animate([{ transform: "translateY(3px)" }, { transform: "none" }], { duration: 300, easing: ease }); }, t)); });
+  t += 380;
+  timers.push(setTimeout(() => { pr.style.opacity = ""; pr.animate([{ opacity: 0, transform: "translate(36px,10px) scale(.985)" }, { opacity: 1, transform: "none" }], { duration: 800, easing: ease }); }, t));
+  [900, 1500, 2300, 2800].forEach((d, i) => timers.push(setTimeout(() => { done(checks[i]); checks[i].animate([{ transform: "translateX(-3px)" }, { transform: "none" }], { duration: 300, easing: ease }); }, t + d)));
+  timers.push(setTimeout(finish, t + 3200));
+})();
+</script>
 </body></html>

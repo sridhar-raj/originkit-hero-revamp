@@ -4,7 +4,7 @@ Every rule the skill applies, with its source. Checked November 2026. Tags: **[V
 primary source; **[S]** seen in excerpts or reputable secondary write-ups; **[K]** an established standard;
 **[O]** practitioner opinion; **[U]** popular but unverified: never cite these as fact to a client.
 
-**Contents:** First screen · Headline and subhead · CTA · Imagery, video, carousels · Hierarchy and legibility · Accessibility · Mobile · The generic look · Unverified claims
+**Contents:** First screen · Headline and subhead · Copy and credibility · CTA · Imagery, video, carousels · Hierarchy and legibility · Accessibility · Mobile · The generic look · The signature moment · Unverified claims
 
 ## First screen
 
@@ -38,6 +38,18 @@ primary source; **[S]** seen in excerpts or reputable secondary write-ups; **[K]
   heuristic (lead with the noun the visitor came for). [S] https://www.nngroup.com/articles/first-2-words-a-signal-for-scanning/
 - **Length: no study sets an ideal word count.** [U] Working heuristic used by the audit: one line on desktop,
   at most 2-3 on a phone; warn above 12 words. Subhead: one sentence, warn above 30 words, 60-75 characters a line.
+
+## Copy and credibility
+
+- **Marketing language costs usability.** Morkes and Nielsen 1997: against a promotional control, objective
+  text scored 27% better on measured usability, concise 58%, scannable 47%, all three combined 124%;
+  participants said they "detest anything that seems like marketing fluff or overly hyped language." [V]
+  https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/
+- **Credibility comes from what can be checked.** Stanford Guidelines for Web Credibility (B.J. Fogg, 2002):
+  #1 "Make it easy to verify the accuracy of the information on your site", #2 "Show that there's a real
+  organization behind your site", #9 "Use restraint with any promotional content". [V]
+  https://credibility.stanford.edu/guidelines/index.html The proof ranking in `copy.md` is built on these
+  guidelines; the order itself is judgment. [O]
 
 ## CTA
 
@@ -84,6 +96,8 @@ primary source; **[S]** seen in excerpts or reputable secondary write-ups; **[K]
   no 5-second exception; content that starts on hover, focus or scroll-in counts as automatic. Audio > 3 s needs
   a pause or volume control (1.4.2). [V] https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html
 - **Respect `prefers-reduced-motion`:** no parallax, auto-rotation or large entrance motion when set. [K]
+  Motion triggered by interaction can be disabled unless essential (WCAG 2.3.3, Level AAA). [K]
+  https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html
 - **Exactly one `<h1>`, and it is the value proposition** (not the logo, not an eyebrow). Decorative images
   `alt=""`; product shots described. Real `<a>`/`<button>` CTAs with a visible focus ring (2.4.7); a sticky header
   must not hide focused elements (2.4.11). [K]
@@ -108,9 +122,16 @@ headline with one gradient word, a purple/indigo glow (Tailwind's `indigo-500` d
 and vague copy ("Supercharge your workflow", "The future of X").
 https://dev.to/alanwest/why-every-ai-built-website-looks-the-same-blame-tailwinds-indigo-500-3h2p ·
 https://superdesign.dev/blog/fix-generic-ai-landing-page
-Remember Tuch 2012: familiar *structure* helps; it's the generic *styling and copy* that hurts.
+Remember Tuch 2012: familiar *structure* helps; it's the generic *styling and copy* that hurts. The tells with
+modern alternatives, the swap test and the density test are in `craft.md`; all of them are judgment. [O]
+
+## The signature moment
+
+No study measures a "signature moment" [O]. Its rules lean on standards: pause control past 5 s (WCAG 2.2.2),
+reduced motion, and LCP not waiting on an animated element (web.dev). See `signature.md`. Claims that motion
+in a hero lifts conversion have no primary source in this file [U]; don't cite one.
 
 ## Unverified claims (don't repeat them as fact)
 
-Ideal headline word count · "'my' vs 'your' +90%" · the Z-pattern · faces lifting conversion · exact Baymard
+Ideal headline word count · hero motion lifting conversion · "'my' vs 'your' +90%" · the Z-pattern · faces lifting conversion · exact Baymard
 slider percentages (paywalled, conflicting versions) · an HTTP Archive figure for lazy-loaded LCP images.

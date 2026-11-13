@@ -81,7 +81,7 @@ const Scene = dynamic(() => import("./Scene"), { ssr: false, loading: () => <Ima
 - Static fallback on reduced motion, no WebGL2, `Save-Data`, low `navigator.deviceMemory`.
 - Pause off-screen (IntersectionObserver, `visibilitychange`; R3F `frameloop={inView ? "always" : "never"}`).
 - Cap DPR at 1.5 (`dpr={[1, 1.5]}` or `setPixelRatio(Math.min(devicePixelRatio, 1.5))`).
-- OriginKit WebGL backgrounds follow the same rules: see the studio notes in SKILL.md.
+- OriginKit WebGL backgrounds follow the same rules: see `originkit.md`, Build rules.
 
 ## Layout shift
 
@@ -100,7 +100,8 @@ jank): only where it must follow the toolbar. Baseline since 2023. https://web.d
 
 Never start the headline at `opacity: 0` and fade it in on hydration: LCP waits until it's visible. Start
 visible and animate `transform` (a short rise or scale), or reveal with a mask/clip that leaves the text
-painted. Respect `prefers-reduced-motion`. In this studio, motion is Framer Motion.
+painted. Respect `prefers-reduced-motion`. Motion is Motion (Framer Motion). The animated signature moment is never
+the LCP element (`signature.md`).
 
 ## Codemods to apply
 

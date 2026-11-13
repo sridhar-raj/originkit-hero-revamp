@@ -1,27 +1,39 @@
 # OriginKit Hero Revamp
 
 An agent skill (for Claude Code, Cursor and other agents that read `SKILL.md`) that rebuilds an **existing**
-website hero in React / Next.js + Tailwind **around [OriginKit](https://www.originkit.dev) components**, so it
-reads in seconds, looks modern and unmistakably its own instead of templated, loads fast, and **proves it with
-before/after measurements**.
+website hero in React / Next.js + Tailwind around **one signature moment**: a live, truthful product behaviour
+in the visual slot, built from an [OriginKit](https://www.originkit.dev) component. The result reads in
+seconds, looks premium and unmistakably its own, loads fast, and **comes with before/after measurements**.
 
-**[See three measured rebuilds](https://sridhar-raj.github.io/originkit-hero-revamp/)**: an invoicing SaaS, a running app and a
-developer CLI, each taken from the usual template hero to a rebuilt one. On a throttled phone connection the
-largest paint drops from about 1.1-1.4 s to 0.22-0.24 s, and every case goes from 4 failures and 16 warnings to none.
+**[See the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)**: five template heroes rebuilt
+and measured. Read the reports:
+[invoicing SaaS](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ledgerly/report.html) (invoices that
+chase themselves), [running app](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tideline/report.html)
+(a plan that reshapes when your legs are sore),
+[developer CLI](https://sridhar-raj.github.io/originkit-hero-revamp/cases/patchwork/report.html) (small fixes
+merged overnight), [coffee subscription](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html)
+(roasted on Tuesday, at your door by Thursday) and
+[weather API](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nimbra/report.html) (a live rain radar that
+is also the API response). On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops
+from 1.2-2.8 s to 0.32-0.34 s, and every case goes from 6 failures and 50-52 warnings to none, at phone, tablet
+and desktop width.
 
 ## How it works
 
-1. **Measure** the current hero in a real browser, at desktop and phone size: LCP (and which element it is),
-   CLS, blocking time (medians over several runs, optionally on throttled Slow 4G + 4× CPU), the headline's
-   length, lines, size and contrast over its real backdrop, the subhead, every CTA's size, label and contrast,
-   media (lazy hero images, oversized files, video without `muted`/`playsInline`/poster), what still moves
-   under reduced motion, first-load weight, and static Next.js traps in the source.
+1. **Measure** the current hero in a real browser, from phone to desktop width: LCP (its element and its
+   breakdown), CLS, blocking time, when the CTAs become visible, headline length and contrast over the real
+   backdrop, CTA size and labels, fonts, images, accessibility basics, frame timing, template tells, how dense
+   the visual slot is, and Next.js traps in the source.
 2. **Diagnose** in a fixed order: clarity, action, legibility, speed, distinctiveness, each tied to evidence.
-3. **Rebuild** around one signature OriginKit component (a background, 3D object, text effect, button, or one of
-   71 OriginKit hero sections) chosen for what it says about the product, from an archetype that fits the product (10 measured from 14 live heroes: product UI, live demo,
-   editorial type, brand object, full-bleed media, shader backdrop, made-work collage, kinetic headline,
-   asymmetric split, quiet type), with type, CTA and motion numbers read from real sites.
-4. **Prove** it: the same audit again, then a before/after report (HTML, plus a Markdown table for the PR).
+3. **Rebuild:**
+   - pick the archetype from the product's truth with a decision tree;
+   - design the signature moment (one product state, 3-5 beats, a still for reduced motion);
+   - write the copy from a sourced kit (headline formulas, outcome CTAs, proof ranked by credibility, never
+     invented);
+   - pass a craft gate built on the [ui-craft](#works-well-with) loop: real product surfaces, quiet type, one
+     moment of motion, checked at 360-1440 px in light and dark.
+4. **Prove** it: the same audit again, then a before/after report with a slider, a scorecard and a Markdown
+   table for the PR. Measured results and judgment calls are labelled as such.
 
 ## Install
 
@@ -35,9 +47,9 @@ scripts need Node 20+ and Playwright with Chromium in the project (`pnpm add -D 
 ## Use it without an agent
 
 ```bash
-node scripts/hero-audit.mjs http://localhost:3000 --out .hero/before --src app --runs 5 --throttle
+node scripts/hero-audit.mjs http://localhost:3000 --out .hero/before --src app --runs 5 --throttle --viewports 390x844,768x1024,1440x900
 # …rebuild the hero…
-node scripts/hero-audit.mjs http://localhost:3000 --out .hero/after --src app --runs 5 --throttle
+node scripts/hero-audit.mjs http://localhost:3000 --out .hero/after --src app --runs 5 --throttle --viewports 390x844,768x1024,1440x900
 node scripts/hero-compare.mjs .hero/before .hero/after     # writes .hero/after/report.html
 ```
 
@@ -48,9 +60,13 @@ audit warns when it sees a dev server.
 
 | Path | What it is |
 |---|---|
-| `SKILL.md` | The method: measure → diagnose → rebuild → prove, and which companion skills to use for what |
+| `SKILL.md` | The method: a quick path, measure → diagnose → rebuild → prove, and what "done" means |
 | `scripts/hero-audit.mjs` | The browser audit (Playwright/Chromium); writes `audit.json` and first-screen screenshots |
-| `scripts/hero-compare.mjs` | The before/after report |
+| `scripts/hero-compare.mjs` | The before/after report: slider, scorecard, metric table |
+| `references/decision-tree.md` | Questions about the product's truth → 1-2 archetypes, and why not the others |
+| `references/signature.md` | How to design the signature moment, with a worked example per archetype |
+| `references/copy.md` | Headline formulas, subhead pattern, CTA labels, proof ranked, a template-to-literal rewrite table |
+| `references/craft.md` | The craft gate, the browser proof matrix, template tells and their alternatives, swap and density tests |
 | `scripts/test-audit.mjs` | The audit's own tests, with fixtures in `scripts/fixtures/` |
 | `references/evidence.md` | Every rule with its source, tagged verified / standard / opinion / unverified (popular claims with no primary source are listed so nobody repeats them) |
 | `references/patterns.md` | Archetypes and measured type, CTA and motion numbers from 14 live heroes (Linear, Vercel, Stripe, Raycast, Cursor, Resend, Framer, Clerk, Notion, Figma, Anthropic, Dia, Apple, Supabase) |
@@ -73,6 +89,7 @@ Nothing from OriginKit ships in this repo (the demo pages are plain HTML/CSS).
 
 ## Works well with
 
+**ui-craft** for the build loop and QA gate (the skill summarises its essentials when it isn't installed),
 [blur-craft](https://github.com/sridhar-raj/blur-craft) for glass and text over imagery, and, if you use them,
 Chrome DevTools' `debug-optimize-lcp` and marketingskills' `copywriting` and `cro`.
 
