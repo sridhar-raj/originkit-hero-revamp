@@ -196,4 +196,4 @@ Use these when installed, each for its own job:
 | `references/patterns.md` | 10 archetypes and measured type, CTA and motion numbers from 14 live heroes |
 | `references/nextjs.md` | Next.js 16 + Tailwind v4: images, fonts, video, WebGL, CLS, viewport units, codemods |
 | `references/originkit.md` | Your account, categories by archetype, the signature rule, build rules, quota etiquette |
-| `cases/` | Five measured rebuilds (invoicing SaaS, running app, developer CLI, coffee subscription, weather API) with reports |
+| `cases/` | Measured rebuilds with before/after reports |

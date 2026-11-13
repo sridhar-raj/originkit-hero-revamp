@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OriginKit Hero Revamp</title>
-<meta name="description" content="An agent skill that rebuilds an existing website hero around one signature moment and proves it with before/after measurements. Five worked examples.">
+<meta name="description" content="An agent skill that rebuilds an existing website hero around one signature moment and proves it with before/after measurements. Worked examples, measured.">
 <link rel="preload" href="demo/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face{font-family:"Inter";src:url(demo/assets/fonts/inter.woff2) format("woff2");font-weight:400 700;font-display:swap}
@@ -89,7 +89,7 @@
     <div>
       <p>An agent skill for React / Next.js + Tailwind. It audits the hero you have in a real browser, rebuilds it around one signature component that shows what the product actually does, and measures it again, so every claim in the hand-off is a number.</p>
       <div class="inst"><code id="cmd"><span>$</span> npx skills add sridhar-raj/originkit-hero-revamp</code><button type="button" id="copy"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg><span>Copy</span></button></div>
-      <a class="jump" href="#cases">See five rebuilds, measured</a>
+      <a class="jump" href="#cases">See the rebuild, measured</a>
     </div>
   </section>
 
@@ -100,47 +100,14 @@
     <div><b><span>04</span>Prove</b>The same audit again, and a before/after report with a slider and the numbers for the PR.</div>
   </section>
 
-  <h2 id="cases">Five rebuilds</h2>
+  <h2 id="cases">Rebuilds</h2>
   <p class="lede">Each "before" is the template hero most generated pages ship: vague copy, a gradient word, a purple glow, a ghost button, a lazy background photo, blocking fonts. Each "after" keeps the product's truth and gives it one moment you can watch. Measured on Slow 4G with a 4× slower CPU, median of three loads. The products and people are made up.</p>
-
-  <article class="case" id="ledgerly">
-    <div class="chead"><h3>Ledgerly</h3><span class="kind">Invoicing for freelancers</span><span class="arch">Product UI as hero</span></div>
-    <div class="ba"><img src="cases/thumbs/ledgerly-before.jpg" srcset="cases/thumbs/ledgerly-before.jpg 720w, cases/ledgerly/before-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="Before: the template Ledgerly hero" loading="lazy" decoding="async"><img class="aft" src="cases/thumbs/ledgerly-after.jpg" srcset="cases/thumbs/ledgerly-after.jpg 720w, cases/ledgerly/after-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="After: the rebuilt Ledgerly hero" loading="lazy" decoding="async"><span class="tag tb">Before</span><span class="tag ta">After</span><span class="bar"></span><span class="knob"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5L3 9l4 4M11 5l4 4-4 4"/></svg></span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after for Ledgerly"></div>
-    <div class="cfoot">
-      <div><p class="moment"><b>An overdue invoice chases itself.</b> Brightwater's €3,600 row is 7 days late; the reminder opens under it, sends, is opened and paid, and €8,940 outstanding counts down to €5,340.</p><div class="links"><a href="demo/after-ledgerly.html">Live after</a><a href="demo/before-ledgerly.html">Live before</a><a href="cases/ledgerly/report.html">Full report</a></div></div>
-      <div class="nums"><div>Phone LCP<b><s>1.26 s</s><i>→</i><em>0.34 s</em></b></div><div>Failures<b><s>6</s><i>→</i><em>0</em></b></div><div>Warnings<b><s>52</s><i>→</i><em>0</em></b></div></div>
-    </div>
-  </article>
-  <article class="case" id="tideline">
-    <div class="chead"><h3>Tideline</h3><span class="kind">A running coach app</span><span class="arch">Live demo on a phone</span></div>
-    <div class="ba"><img src="cases/thumbs/tideline-before.jpg" srcset="cases/thumbs/tideline-before.jpg 720w, cases/tideline/before-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="Before: the template Tideline hero" loading="lazy" decoding="async"><img class="aft" src="cases/thumbs/tideline-after.jpg" srcset="cases/thumbs/tideline-after.jpg 720w, cases/tideline/after-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="After: the rebuilt Tideline hero" loading="lazy" decoding="async"><span class="tag tb">Before</span><span class="tag ta">After</span><span class="bar"></span><span class="knob"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5L3 9l4 4M11 5l4 4-4 4"/></svg></span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after for Tideline"></div>
-    <div class="cfoot">
-      <div><p class="moment"><b>Your legs set tomorrow's run.</b> The "how do your legs feel" check-in reshapes the workout, its minute-by-minute effort chart and the week's load; drag it yourself.</p><div class="links"><a href="demo/after-tideline.html">Live after</a><a href="demo/before-tideline.html">Live before</a><a href="cases/tideline/report.html">Full report</a></div></div>
-      <div class="nums"><div>Phone LCP<b><s>1.24 s</s><i>→</i><em>0.32 s</em></b></div><div>Failures<b><s>6</s><i>→</i><em>0</em></b></div><div>Warnings<b><s>50</s><i>→</i><em>0</em></b></div></div>
-    </div>
-  </article>
-  <article class="case" id="patchwork">
-    <div class="chead"><h3>Patchwork</h3><span class="kind">A developer CLI</span><span class="arch">Agent-native CTA, live run</span></div>
-    <div class="ba"><img src="cases/thumbs/patchwork-before.jpg" srcset="cases/thumbs/patchwork-before.jpg 720w, cases/patchwork/before-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="Before: the template Patchwork hero" loading="lazy" decoding="async"><img class="aft" src="cases/thumbs/patchwork-after.jpg" srcset="cases/thumbs/patchwork-after.jpg 720w, cases/patchwork/after-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="After: the rebuilt Patchwork hero" loading="lazy" decoding="async"><span class="tag tb">Before</span><span class="tag ta">After</span><span class="bar"></span><span class="knob"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5L3 9l4 4M11 5l4 4-4 4"/></svg></span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after for Patchwork"></div>
-    <div class="cfoot">
-      <div><p class="moment"><b>The night shift, in one PR.</b> The terminal runs the copied prompt, finds three flaky tests, then the pull request slides in and its checks turn green.</p><div class="links"><a href="demo/after-patchwork.html">Live after</a><a href="demo/before-patchwork.html">Live before</a><a href="cases/patchwork/report.html">Full report</a></div></div>
-      <div class="nums"><div>Phone LCP<b><s>1.27 s</s><i>→</i><em>0.32 s</em></b></div><div>Failures<b><s>6</s><i>→</i><em>0</em></b></div><div>Warnings<b><s>52</s><i>→</i><em>0</em></b></div></div>
-    </div>
-  </article>
   <article class="case" id="lowfield">
     <div class="chead"><h3>Lowfield</h3><span class="kind">A coffee roaster&#x27;s subscription</span><span class="arch">Editorial type and brand object</span></div>
     <div class="ba"><img src="cases/thumbs/lowfield-before.jpg" srcset="cases/thumbs/lowfield-before.jpg 720w, cases/lowfield/before-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="Before: the template Lowfield hero" loading="lazy" decoding="async"><img class="aft" src="cases/thumbs/lowfield-after.jpg" srcset="cases/thumbs/lowfield-after.jpg 720w, cases/lowfield/after-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="After: the rebuilt Lowfield hero" loading="lazy" decoding="async"><span class="tag tb">Before</span><span class="tag ta">After</span><span class="bar"></span><span class="knob"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5L3 9l4 4M11 5l4 4-4 4"/></svg></span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after for Lowfield"></div>
     <div class="cfoot">
       <div><p class="moment"><b>The bag proves the promise.</b> Its label plots the real roast curve to first crack, the roast date is stamped, and the roast-to-door ticket runs Tuesday to Thursday. Pick another origin.</p><div class="links"><a href="demo/after-lowfield.html">Live after</a><a href="demo/before-lowfield.html">Live before</a><a href="cases/lowfield/report.html">Full report</a></div></div>
       <div class="nums"><div>Phone LCP<b><s>1.23 s</s><i>→</i><em>0.32 s</em></b></div><div>Failures<b><s>6</s><i>→</i><em>0</em></b></div><div>Warnings<b><s>50</s><i>→</i><em>0</em></b></div></div>
-    </div>
-  </article>
-  <article class="case" id="nimbra">
-    <div class="chead"><h3>Nimbra</h3><span class="kind">A weather API</span><span class="arch">Shader backdrop, full bleed</span></div>
-    <div class="ba"><img src="cases/thumbs/nimbra-before.jpg" srcset="cases/thumbs/nimbra-before.jpg 720w, cases/nimbra/before-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="Before: the template Nimbra hero" loading="lazy" decoding="async"><img class="aft" src="cases/thumbs/nimbra-after.jpg" srcset="cases/thumbs/nimbra-after.jpg 720w, cases/nimbra/after-desktop.jpg 1440w" sizes="(max-width:1160px) 100vw, 1120px" width="720" height="450" alt="After: the rebuilt Nimbra hero" loading="lazy" decoding="async"><span class="tag tb">Before</span><span class="tag ta">After</span><span class="bar"></span><span class="knob"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5L3 9l4 4M11 5l4 4-4 4"/></svg></span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after for Nimbra"></div>
-    <div class="cfoot">
-      <div><p class="moment"><b>The backdrop is the product.</b> A live radar drifts over the coast; the API card forecasts the pinned city from that same field, minute by minute. Tap the map to move the pin.</p><div class="links"><a href="demo/after-nimbra.html">Live after</a><a href="demo/before-nimbra.html">Live before</a><a href="cases/nimbra/report.html">Full report</a></div></div>
-      <div class="nums"><div>Phone LCP<b><s>2.80 s</s><i>→</i><em>0.34 s</em></b></div><div>Failures<b><s>6</s><i>→</i><em>0</em></b></div><div>Warnings<b><s>50</s><i>→</i><em>0</em></b></div></div>
     </div>
   </article>
 

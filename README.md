@@ -5,18 +5,11 @@ website hero in React / Next.js + Tailwind around **one signature moment**: a li
 in the visual slot, built from an [OriginKit](https://www.originkit.dev) component. The result reads in
 seconds, looks premium and unmistakably its own, loads fast, and **comes with before/after measurements**.
 
-**[See the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)**: five template heroes rebuilt
-and measured. Read the reports:
-[invoicing SaaS](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ledgerly/report.html) (invoices that
-chase themselves), [running app](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tideline/report.html)
-(a plan that reshapes when your legs are sore),
-[developer CLI](https://sridhar-raj.github.io/originkit-hero-revamp/cases/patchwork/report.html) (small fixes
-merged overnight), [coffee subscription](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html)
-(roasted on Tuesday, at your door by Thursday) and
-[weather API](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nimbra/report.html) (a live rain radar that
-is also the API response). On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops
-from 1.2-2.8 s to 0.32-0.34 s, and every case goes from 6 failures and 50-52 warnings to none, at phone, tablet
-and desktop width.
+**[See the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)** and the
+[coffee subscription rebuild](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html): a
+template hero taken to "Roasted on Tuesday, at your door by Thursday", where the bag's own label proves the
+promise. On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 1.23 s to
+0.32 s, and it goes from 6 failures and 50 warnings to none, at phone, tablet and desktop width.
 
 ## How it works
 
