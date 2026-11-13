@@ -11,20 +11,20 @@ measured, each from a different kind of bad first screen:
 
 - [Lowfield](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html), a coffee subscription:
   "Roasted on Tuesday, at your door by Thursday", proved by the bag's own label. Split layout.
-- [Saltmarsh](https://sridhar-raj.github.io/originkit-hero-revamp/cases/saltmarsh/report.html), a sailing school:
-  "Sailing lessons that move when the wind does", with the sea driven by the forecast. Bottom-anchored type
-  over a full-bleed sea.
+- [Tamber](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tamber/report.html), a keyboard maker:
+  "Type on the Sixty before you buy it", a 3D keyboard you press, with the switch's force curve read out live.
+  Headline row over a full-width object stage.
 - [Dayside](https://sridhar-raj.github.io/originkit-hero-revamp/cases/dayside/report.html), team scheduling:
-  "A call time that's daylight for all of you", a photoreal planet rising from the bottom edge, lit by the
-  real sun for each hour. Centred headline over a planet horizon.
+  "A call time that's daylight for all of you", a photoreal globe lit by the real sun for each hour, with each
+  teammate's local time and sun height beside it. The object in the centre, copy and readout either side.
 - [Nacre](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html), a perfume sample set:
-  "Watch a scent change on your skin, hour by hour", a glass flacon whose ink is the scent's dry-down.
-  Centred editorial stack with type layered behind the object.
+  "Watch a scent change on your skin", a ray-traced crystal whose inner light is the scent's dry-down.
+  A centred stack with the notes and the readout either side of the object.
 
-On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 0.9-1.2 s to
-0.31-0.34 s, and every case ends with no failures at phone, tablet and desktop width. Lowfield and Saltmarsh
-also end with no warnings; Dayside and Nacre keep a few blocking-time and frame-timing warnings from their
-WebGL start-up (the audit's headless Chrome renders WebGL in software), listed in their reports.
+On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 0.9-3.5 s to
+0.31-0.33 s, the headline is the largest paint in every after, and every case ends with no failures and no
+warnings at phone, tablet and desktop width. Each 3D object shows a still render of itself until the visitor
+first moves, scrolls or taps (the globe also starts a few seconds after load), so the headline paints first.
 
 ## Requirements
 
@@ -120,7 +120,7 @@ spends your quota, so the skill proposes its picks with links and reasons, agree
 each once.
 
 Components fetched with your account are yours to use in your product, but must not be republished as
-standalone code in public repos, gists or demos. Saltmarsh, Dayside and Nacre were built with OriginKit
+standalone code in public repos, gists or demos. Tamber, Dayside and Nacre were built with OriginKit
 components, so this repo ships their screenshots, recordings and measured reports, not the component code;
 Lowfield is plain HTML and CSS, so its live page is included.
 
