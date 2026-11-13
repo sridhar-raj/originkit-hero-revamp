@@ -1,20 +1,41 @@
 # OriginKit in the rebuild
 
-Every rebuild is built around OriginKit components when they fit: they are what makes a revamped hero modern
-and unmistakably its own instead of another template. **Contents:** Connect your account · Pick by archetype ·
-The signature rule · The modern-and-unique bar · Build rules · Quota etiquette · Without an account
+Every rebuild is built **mostly from OriginKit components**, customised to the product: they are what makes a
+revamped hero modern and unmistakably its own instead of another template. A connected OriginKit account is
+required for the rebuild. **Contents:** Connect your account (required) · Pick by archetype · The composition
+rule · The modern-and-unique bar · Build rules · Quota etiquette · Never publish OriginKit source
 
-## Connect your account
+## Connect your account (required)
 
 Each user connects **their own** OriginKit account. The skill never ships OriginKit code and never uses someone
-else's key.
+else's key. The audit scripts (`hero-audit.mjs`, `hero-compare.mjs`) only measure and may be run standalone
+without an account; the rebuild requires one.
 
-- **CLI** (simplest): `npx originkit login` (browser sign-in, no API key) · `npx originkit whoami` · browse with
-  `npx originkit search "<words>"` and `npx originkit list` (free) · install with `npx originkit add <slug>`
-  (**spends your quota**; presets as `--<name>`, e.g. `--dark`).
-- **MCP**: `claude mcp add -s local --transport http originkit https://mcp.originkit.dev/mcp --header "Authorization: Bearer <your OriginKit API key>"`.
-  `search` / `list_components` browse (free); `get_component` / `fetch` deliver (spend quota).
-- Keep keys out of git. Don't commit OriginKit component source to a public repo unless your licence allows it.
+**Check first** (step 0 of `SKILL.md`): run `npx originkit whoami`, or call the `originkit` MCP's `search` /
+`list_components`. Either answering means connected; continue.
+
+**If neither is connected, stop and guide the user, one step at a time.** Give one step, wait for them to say
+it's done, then give the next. Do not rebuild a hero by hand instead.
+
+1. **Account.** Create or sign in to an OriginKit account at https://www.originkit.dev.
+2. **Install the CLI** in the project: `pnpm add -D originkit` (or `npm i -D originkit`).
+3. **Log in.** The user runs `npx originkit login` in their own terminal. A browser sign-in opens; no API key
+   is needed. Never ask them to paste a key or token into the chat.
+4. **Verify.** `npx originkit whoami` prints the signed-in account. If it doesn't, repeat step 3.
+5. **Or the MCP** (optional, instead of 2-4), with the user's own key, run by them:
+   `claude mcp add -s local --transport http originkit https://mcp.originkit.dev/mcp --header "Authorization: Bearer <your key>"`.
+   It's connected when its `search` / `list_components` tools answer.
+6. **Re-check**, then continue with step 1 of the method.
+
+**Troubleshooting:** a login that has expired → run `npx originkit login` again and verify. Quota reached →
+browsing still works (free); propose fewer picks and add each once, or wait for the quota to reset.
+
+**Using it:**
+
+- **CLI:** browse with `npx originkit search "<words>"` and `npx originkit list` (free) · install with
+  `npx originkit add <slug>` (**spends your quota**; presets as `--<name>`, e.g. `--dark`).
+- **MCP:** `search` / `list_components` browse (free); `get_component` / `fetch` deliver (spend quota).
+- Keep keys out of git.
 
 ## Pick by archetype
 
@@ -23,7 +44,7 @@ The catalog (about 950 items) is organised by kind and category. Start from the 
 
 | Archetype (patterns.md) | Browse first | Typical role in the hero |
 |---|---|---|
-| Whole-hero starting point (any archetype) | **section · hero** (71) | Start from a complete OriginKit hero, then re-skin it to the design system and real copy |
+| Whole-hero base (any archetype) | **section · hero** (71) | Start from a complete OriginKit hero, then customise it to the design system, real copy, data and motion speed |
 | Shader / generative backdrop, full-bleed | **background-animation** (≈295) | The light behind everything; text sits in a quiet zone or on a backing |
 | Statement + brand object, 3D | **animation** (≈100), **interactive-elements** (≈130) | One object tied to the logo or metaphor, lit, beside or behind the headline |
 | Kinetic headline | **text** (≈90) | One animated slot or treatment on the h1, never the whole paragraph |
@@ -34,15 +55,22 @@ The catalog (about 950 items) is organised by kind and category. Start from the 
 Search with the product's own nouns and mood, not the category's ("tidal ripple", "ink bloom", "terminal glow"),
 and read each candidate's description and props before choosing.
 
-## The signature rule
+## The composition rule
 
-One **signature component** per hero: the thing a visitor remembers, chosen because it says something true
-about the product (water caustics for a sea-freight tracker, a data-pixel arc for an analytics tool, a glass
-dodecahedron for a dev tool about many sides of one system). Everything else stays quiet. Optional second and
-third pieces: a text effect on one word, a distinctive primary button. Never three loud components competing.
-Wire its props to the product's state where you can (hover, selected industry, live numbers), so it's part of
-the product, not decoration. The component is the material; what it does is the signature moment, designed
-with `signature.md`.
+Build the hero **mostly from OriginKit components**, in one of two ways:
+
+- **A hero section as the base:** one of the 71 hero sections, customised to the product; or
+- **Composed:** a background, a 3D object, a text effect and a button from the catalog, arranged by you.
+
+Every component is **customised to the product** (its copy, palette, data, motion speed), never dropped in
+as-is. Hand-written code is limited to glue, layout and the product's real data.
+
+The **signature moment** still comes from the product's truth: one piece carries it, chosen because it says
+something true about the product (water caustics for a sea-freight tracker, a data-pixel arc for an analytics
+tool, a glass dodecahedron for a dev tool about many sides of one system). Everything else stays quiet: a text
+effect on one word, a distinctive primary button. Never three loud components competing. Wire the props to
+the product's state (hover, selected industry, live numbers), so it's part of the product, not decoration.
+The components are the material; what they do is the signature moment, designed with `signature.md`.
 
 ## The modern-and-unique bar
 
@@ -51,7 +79,8 @@ A rebuild fails review if any of these are true:
 - It could swap logos with a competitor and still work (the visual, copy or palette says nothing about *this* product).
 - It shows the template tells: centred headline with one gradient word, purple/indigo glow, eyebrow pill,
   filled + ghost pair, grey logo strip, three icon cards, vague copy (evidence.md, The generic look).
-- The signature component is decoration that the copy never connects to.
+- A component is dropped in as-is (its demo copy, palette or speed), or the signature piece is decoration
+  that the copy never connects to.
 - The type is a default (Inter or system at 600 with no tracking decision), or set without the measured numbers
   in patterns.md.
 - Motion is on everything, or nothing in the hero responds to the visitor.
@@ -75,11 +104,13 @@ and density tests, depth details) is in `craft.md`. Run **taste-skill** / **fron
 
 ## Quota etiquette
 
-Adds are live deliveries. Browse and agree the pick with the user first; check the project (and its other
-sections) for an already-installed copy before adding; add once; never add "to see what it looks like" when the
-description and props already answer that.
+Browsing is free; adds are live deliveries that spend the user's quota. Propose the picks with their links and
+why each fits, agree them with the user, then add each once. Check the project (and its other sections) for an
+already-installed copy before adding; never add "to see what it looks like" when the description and props
+already answer that.
 
-## Without an account
+## Never publish OriginKit source
 
-Say that OriginKit isn't connected, build the visual in HTML/CSS (or the project's own components), and name the
-OriginKit component that would replace it, with its link, so the user can add it later.
+Components fetched with the user's account are theirs to use in their product. They must not be republished
+as standalone code in public repos, gists or demos. Showcases of OriginKit-built heroes use screenshots, video
+and the measured reports, never the component code.

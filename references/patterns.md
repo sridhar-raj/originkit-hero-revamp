@@ -24,8 +24,9 @@ Pick the one the product's truth supports. Each lists what it needs and how it u
 | 10 | **Quiet small type** | Cursor (26 px h1), Apple (28 px h1 eyebrow) | confident, well-known brands | a strong visual underneath, generous space above | small type over a weak visual = unfinished |
 | + | **Agent-native CTA** (modifier) | Clerk ("Copy prompt"), Framer ("Get the MCP"), design-file galleries ("Copy the prompt" + "Copy the curl command" beside a tabbed Terminal / DESIGN.md preview) | dev tools and agent-facing products in 2026 | one primary action that hands off to the visitor's agent: a filled "Copy the prompt", a weaker "Copy the command", and a preview of exactly what gets copied (a terminal block with the prompt highlighted); a copied-state confirmation | used where the audience isn't developers; a copy button with no visible preview of what it copies |
 
-The visual slot is usually an OriginKit component (a WebGL background, a 3D object, a text effect) inside a
-real product surface: archetypes 4, 5, 6 and 2 map onto it directly. To choose between archetypes, use
+The hero is built mostly from OriginKit components (a hero section as the base, or a WebGL background, a 3D
+object, a text effect and a button), customised to the product and set in a real product surface: archetypes
+4, 5, 6 and 2 map onto it directly. To choose between archetypes, use
 `decision-tree.md`; to design what the visual does, `signature.md`.
 
 ## Typography numbers

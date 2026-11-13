@@ -5,8 +5,9 @@ truthful product behaviour shown in the visual slot: an invoice that sends its o
 reshapes when you say your legs are sore, a nightly agent that opens one tidy pull request. A visitor should be
 able to describe the product from the moment alone.
 
-It is not a decoration, a background effect or a demo of the component library. The OriginKit signature
-component (`originkit.md`) is often the material it's built from; the moment is what that material *does*.
+It is not a decoration, a background effect or a demo of the component library. The OriginKit components
+(`originkit.md`) are the material it's built from, customised to the product; the moment is what that
+material *does*.
 
 Everything here is judgment [O] unless tagged. The accessibility and LCP rules are standards [K].
 
@@ -81,7 +82,7 @@ reads as a screenshot.
   independent animations. It makes the still, the replay and reduced motion trivial.
 - Use Motion (Framer Motion) as the project's motion library; `useReducedMotion()` picks the still.
 - Start the moment after first paint (an effect, or idle), never in the critical path of the LCP.
-- If the moment is built from an OriginKit component, wire its props to the beats (heading, intensity, a
+- The moment is built from OriginKit components: wire their props to the beats (heading, intensity, a
   live value), and give it the WebGL build rules in `originkit.md`.
 - Reserve the space of every beat up front (fixed heights, `tabular-nums` for numbers) so nothing shifts
   layout: CLS counts shifts that aren't caused by input [K].
