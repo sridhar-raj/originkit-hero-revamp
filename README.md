@@ -6,17 +6,11 @@ components** customised to the product, around **one signature moment**: a live,
 in the visual slot. The result reads in seconds, looks premium and unmistakably its own, loads fast, and
 **comes with before/after measurements**.
 
-**[See the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)**: four template heroes rebuilt and
+**[See the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)**: template heroes rebuilt and
 measured, each from a different kind of bad first screen:
 
 - [Lowfield](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html), a coffee subscription:
   "Roasted on Tuesday, at your door by Thursday", proved by the bag's own label. Split layout.
-- [Tamber](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tamber/report.html), a keyboard maker:
-  "Type on the Sixty before you buy it", a 3D keyboard you press, with the switch's force curve read out live.
-  Headline row over a full-width object stage.
-- [Dayside](https://sridhar-raj.github.io/originkit-hero-revamp/cases/dayside/report.html), team scheduling:
-  "A call time that's daylight for all of you", a photoreal globe lit by the real sun for each hour, with each
-  teammate's local time and sun height beside it. The object in the centre, copy and readout either side.
 - [Nacre](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html), a perfume sample set:
   "Watch a scent change on your skin", a ray-traced crystal whose inner light is the scent's dry-down.
   A centred stack with the notes and the readout either side of the object.
@@ -120,7 +114,7 @@ spends your quota, so the skill proposes its picks with links and reasons, agree
 each once.
 
 Components fetched with your account are yours to use in your product, but must not be republished as
-standalone code in public repos, gists or demos. Tamber, Dayside and Nacre were built with OriginKit
+standalone code in public repos, gists or demos. Nacre was built with OriginKit
 components, so this repo ships their screenshots, recordings and measured reports, not the component code;
 Lowfield is plain HTML and CSS, so its live page is included.
 
