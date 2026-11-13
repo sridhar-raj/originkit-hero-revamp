@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=block">
+<style>
+  *{box-sizing:border-box} body{margin:0;font-family:Montserrat,sans-serif;color:#8a7f74;background:#f6f0e8}
+  header{display:flex;align-items:center;justify-content:space-between;padding:26px 5vw;font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+  header b{font:300 26px "Cormorant Garamond",serif;letter-spacing:.5em;color:#6f655c}
+  .hero{position:relative;height:100vh;overflow:hidden}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s}
+  .slide.on{opacity:1}
+  .slide img{width:100%;height:100%;object-fit:cover}
+  .cap{position:absolute;left:0;right:0;top:22%;text-align:center}
+  h1{font:300 clamp(30px,3.6vw,56px)/1.25 "Cormorant Garamond",serif;letter-spacing:.32em;text-transform:uppercase;color:#d8cfc4;margin:0}
+  .cap p{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#c9bfb3;margin:18px 0 26px}
+  .cap a{font-size:10px;letter-spacing:.35em;color:#b3a798;text-decoration:none;border-bottom:1px solid #d8cfc4;padding-bottom:4px}
+  .arrow{position:absolute;top:50%;width:44px;height:44px;border:1px solid #d8cfc4;border-radius:50%;background:none;color:#b3a798;font-size:18px}
+  .prev{left:3vw}.next{right:3vw}
+  .dots{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:10px}.dots i{width:7px;height:7px;border-radius:50%;background:#d8cfc4}.dots i.on{background:#8a7f74}
+  .modal{position:fixed;inset:0;background:rgba(40,32,26,.45);display:grid;place-items:center;z-index:9}
+  .box{position:relative;width:min(440px,88vw);background:#fbf7f2;padding:40px 34px;text-align:center}
+  .box h2{font:300 28px "Cormorant Garamond",serif;letter-spacing:.12em;color:#6f655c;margin:0 0 10px}
+  .box p{font-size:13px;line-height:1.7;margin:0 0 20px}
+  .box input{width:100%;border:0;border-bottom:1px solid #cfc4b7;background:none;padding:10px 0;font:inherit;margin-bottom:18px}
+  .box button{background:#6f655c;color:#fbf7f2;border:0;padding:12px 26px;font:inherit;font-size:11px;letter-spacing:.3em}
+  .x{position:absolute;top:8px;right:12px;width:36px;height:36px;padding:0;background:none !important;border:0;font-size:22px;letter-spacing:0;color:#8a7f74 !important}
+</style><title>Nacre (before)</title></head><body>
+<header><span>Menu</span><b>NACRE</b><span>Bag</span></header>
+<section class="hero">
+  <div class="slide on"><img src="assets/before-nacre-bottle-1.jpg" loading="lazy" alt=""></div>
+  <div class="slide"><img src="assets/before-nacre-bottle-2.jpg" loading="lazy" alt=""></div>
+  <div class="slide"><img src="assets/before-nacre-bottle-3.jpg" loading="lazy" alt=""></div>
+  <div class="cap"><h1>Essence of elegance</h1><p>A journey of the senses</p><a href="#">Shop now</a></div>
+  <button class="arrow prev">‹</button><button class="arrow next">›</button>
+  <div class="dots"><i class="on"></i><i></i><i></i></div>
+</section>
+<div class="modal"><div class="box"><button class="x">×</button><h2>Join the world of Nacre</h2><p>Subscribe to our newsletter and receive 10% off your first order, plus exclusive previews.</p><input placeholder="Your email"><button>Subscribe</button></div></div>
+<script>let i=0;const s=document.querySelectorAll('.slide'),d=document.querySelectorAll('.dots i');setInterval(()=>{s[i].classList.remove('on');d[i].classList.remove('on');i=(i+1)%3;s[i].classList.add('on');d[i].classList.add('on')},3500)</script>
+</body></html>

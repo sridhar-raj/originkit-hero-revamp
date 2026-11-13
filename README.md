@@ -10,16 +10,21 @@ in the visual slot. The result reads in seconds, looks premium and unmistakably 
 measured, each from a different kind of bad first screen:
 
 - [Lowfield](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html), a coffee subscription:
-  "Roasted on Tuesday, at your door by Thursday", proved by the bag's own label.
-- [Ashgrove](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ashgrove/report.html), a studio's kiln
-  booking: "Fire one mug without waiting for a full kiln", with a live flame in the spy-hole.
-- [Fennick](https://sridhar-raj.github.io/originkit-hero-revamp/cases/fennick/report.html), a keyboard maker:
-  "Type on the Sixty before you buy it", a 3D board you can type on.
+  "Roasted on Tuesday, at your door by Thursday", proved by the bag's own label. Split layout.
 - [Saltmarsh](https://sridhar-raj.github.io/originkit-hero-revamp/cases/saltmarsh/report.html), a sailing school:
-  "Sailing lessons that move when the wind does", with the sea driven by the forecast.
+  "Sailing lessons that move when the wind does", with the sea driven by the forecast. Bottom-anchored type
+  over a full-bleed sea.
+- [Dayside](https://sridhar-raj.github.io/originkit-hero-revamp/cases/dayside/report.html), team scheduling:
+  "A call time that's daylight for all of you", a photoreal planet rising from the bottom edge, lit by the
+  real sun for each hour. Centred headline over a planet horizon.
+- [Nacre](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html), a perfume sample set:
+  "Watch a scent change on your skin, hour by hour", a glass flacon whose ink is the scent's dry-down.
+  Centred editorial stack with type layered behind the object.
 
-On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 1.2-1.4 s to
-0.32-0.55 s, and every case ends with no failures and no warnings at phone, tablet and desktop width.
+On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 0.9-1.2 s to
+0.31-0.34 s, and every case ends with no failures at phone, tablet and desktop width. Lowfield and Saltmarsh
+also end with no warnings; Dayside and Nacre keep a few blocking-time and frame-timing warnings from their
+WebGL start-up (the audit's headless Chrome renders WebGL in software), listed in their reports.
 
 ## Requirements
 
@@ -115,7 +120,7 @@ spends your quota, so the skill proposes its picks with links and reasons, agree
 each once.
 
 Components fetched with your account are yours to use in your product, but must not be republished as
-standalone code in public repos, gists or demos. Ashgrove, Fennick and Saltmarsh were built with OriginKit
+standalone code in public repos, gists or demos. Saltmarsh, Dayside and Nacre were built with OriginKit
 components, so this repo ships their screenshots, recordings and measured reports, not the component code;
 Lowfield is plain HTML and CSS, so its live page is included.
 
