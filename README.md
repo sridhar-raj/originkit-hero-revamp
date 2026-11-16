@@ -14,29 +14,48 @@ before/after sliders and recordings.
 ### Ferro
 Treasury for finance teams. *“All your cash, finally in one place.”* A calm sky (OriginKit) through an arched window and a live consolidated cash position.
 
-[![Ferro: before and after](cases/ferro/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/report.html)
+[![Ferro: before and after](cases/ferro/compare.jpg)](https://originkit-x-posts.vercel.app/revamp/ferro)
 
-[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/ferro) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-ferro.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/report.html)
+[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/ferro) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-ferro.html)
+
+### Fieldnote
+AI meeting notes. *“The meeting, already written up.”* The call set as a newspaper front page: decisions, owned action items ticking off, and today's other meetings below the fold.
+
+[![Fieldnote: before and after](cases/fieldnote/compare.jpg)](https://originkit-x-posts.vercel.app/revamp/fieldnote)
+
+[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/fieldnote) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/fieldnote/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-fieldnote.html)
+
+### Verso
+A reading app. *“Remember every book you read.”* Typographic covers fanned in 3D; the front book moves to the back and its highlight comes up.
+
+[![Verso: before and after](cases/verso/compare.jpg)](https://originkit-x-posts.vercel.app/revamp/verso)
+
+[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/verso) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/verso/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-verso.html)
+
+### Tide
+A marine forecast. *“Know the water before you leave the house.”* Calm sea-glass water (OriginKit) behind the day's best window to go out: tide curve, swell and wind.
+
+[![Tide: before and after](cases/tide/compare.jpg)](https://originkit-x-posts.vercel.app/revamp/tide)
+
+[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/tide) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tide/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-tide.html)
 
 ### Lowfield
 A coffee subscription. *“Roasted on Tuesday, at your door by Thursday”*, proved by the bag's own label.
 
-[![Lowfield: before and after](cases/lowfield/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html)
+[![Lowfield: before and after](cases/lowfield/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/demo/after-lowfield.html)
 
-[**Live after ↗**](https://sridhar-raj.github.io/originkit-hero-revamp/demo/after-lowfield.html) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-lowfield.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/lowfield/report.html)
+[**Live after ↗**](https://sridhar-raj.github.io/originkit-hero-revamp/demo/after-lowfield.html) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-lowfield.html)
 
 ### Nacre
 A perfume sample set. *“Watch a scent change on your skin”*: a ray-traced crystal (OriginKit) whose inner light is the scent's dry-down.
 
-[![Nacre: before and after](cases/nacre/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html)
+[![Nacre: before and after](cases/nacre/compare.jpg)](https://originkit-x-posts.vercel.app/nacre/index.html)
 
-[Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-nacre.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html)
+[**Live after ↗**](https://originkit-x-posts.vercel.app/nacre/index.html) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-nacre.html)
 
-Ferro was made end to end with the current skill: a Pinterest moodboard of ten references (kept local), two
-directions, one picked, built from OriginKit components, two fix rounds. Its "before" page is a bare HTML
-file, so it loads slightly faster than the full Next.js hero (0.20 s vs 0.66 s largest paint on a throttled
-phone, both well under 2.5 s); the gains are in clarity, look and the phone layout. Lowfield and Nacre drop from 0.9-3.5 s to 0.31-0.33 s with no failures or warnings left. The
-OriginKit component code stays private: the live page runs on a separate site.
+Every example was made with the skill: a Pinterest moodboard of references (kept local), two directions,
+one picked, built from OriginKit components customised to the product, checked in fix rounds. The OriginKit
+component code stays private: the live pages run on a separate site. The products and people are made up.
 
 ## Requirements
 
