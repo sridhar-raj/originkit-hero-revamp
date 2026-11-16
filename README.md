@@ -11,26 +11,12 @@ in the visual slot. The result reads in seconds, looks premium and unmistakably 
 Template heroes rebuilt with the skill, before and after. **[Open the showcase](https://sridhar-raj.github.io/originkit-hero-revamp/)** for draggable
 before/after sliders and recordings.
 
-### Halyard
-An AI incident-response agent. *“Incidents resolved before the page lands.”* A warm horizon light (OriginKit) with the live incident resolving on it, step by step.
-
-[![Halyard: before and after](cases/halyard/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/halyard/report.html)
-
-[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/halyard) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/halyard/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-halyard.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/halyard/report.html)
-
 ### Ferro
 Treasury for finance teams. *“All your cash, finally in one place.”* A calm sky (OriginKit) through an arched window and a live consolidated cash position.
 
 [![Ferro: before and after](cases/ferro/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/report.html)
 
 [**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/ferro) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-ferro.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/report.html)
-
-### Tabla
-An AI phone host for restaurants. *“The phone rings. The kitchen keeps cooking.”* Every call becomes a ticket on the kitchen rail, printing line by line.
-
-[![Tabla: before and after](cases/tabla/compare.jpg)](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tabla/report.html)
-
-[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/tabla) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tabla/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-tabla.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tabla/report.html)
 
 ### Lowfield
 A coffee subscription. *“Roasted on Tuesday, at your door by Thursday”*, proved by the bag's own label.
@@ -46,12 +32,11 @@ A perfume sample set. *“Watch a scent change on your skin”*: a ray-traced cr
 
 [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-nacre.html) · [Full report](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html)
 
-Halyard, Ferro and Tabla were made end to end with the current skill: a Pinterest moodboard of ten
-references (kept local), two directions, one picked, built from OriginKit components, two fix rounds. Their
-"before" pages are bare HTML files, so they load slightly faster than the full Next.js heroes (0.20 s vs
-0.66-1.05 s largest paint on a throttled phone, all well under 2.5 s); the gains are in clarity, look and the
-phone layout. Lowfield and Nacre drop from 0.9-3.5 s to 0.31-0.33 s with no failures or warnings left. The
-OriginKit component code stays private: the live pages run on a separate site.
+Ferro was made end to end with the current skill: a Pinterest moodboard of ten references (kept local), two
+directions, one picked, built from OriginKit components, two fix rounds. Its "before" page is a bare HTML
+file, so it loads slightly faster than the full Next.js hero (0.20 s vs 0.66 s largest paint on a throttled
+phone, both well under 2.5 s); the gains are in clarity, look and the phone layout. Lowfield and Nacre drop from 0.9-3.5 s to 0.31-0.33 s with no failures or warnings left. The
+OriginKit component code stays private: the live page runs on a separate site.
 
 ## Requirements
 
