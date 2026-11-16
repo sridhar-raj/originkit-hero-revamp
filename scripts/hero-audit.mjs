@@ -3,13 +3,14 @@
 // and can prove what it changed.
 //
 //   node <skill>/scripts/hero-audit.mjs <url | file.html> [--out <dir>] [--selector "<hero css>"]
-//        [--src <folder>] [--throttle] [--runs N] [--viewports 360x780,390x844,768x1024,1440x900]
+//        [--src <folder>] [--throttle] [--proof] [--runs N] [--viewports 360x780,390x844,768x1024,1440x900]
 //        [--desktop 1440x900] [--phone 390x844]
 //
 //   --out        folder for audit.json and the first-screen screenshots (default ./hero-audit)
 //   --selector   the hero element (default: the section/header that holds the first h1, else the first screen)
 //   --src        the hero's source folder or file: also runs the static checks (Next.js and Tailwind traps)
 //   --throttle   Slow 4G + 4x CPU slowdown for the LCP and CLS pass (what a mid-range phone on mobile data sees)
+//   --proof      shorthand for --runs 5 --throttle --viewports 360x780,390x844,768x1024,1024x768,1440x900
 //   --runs N     load each view N times and report the median LCP / CLS / TBT / FCP / LCP subparts (use 5 for proof)
 //   --viewports  comma-separated WxH list (default: the --desktop and --phone sizes). A size equal to --desktop is
 //                reported as "desktop", one equal to --phone as "phone", any other as "WxH" (e.g. "768x1024").
@@ -45,18 +46,20 @@ const args = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["--out", "--selector", "--src", "--desktop", "--phone", "--runs", "--viewports"]);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 let target = args.find((a, i) => !a.startsWith("--") && !VALUE_FLAGS.has(args[i - 1]));
-if (!target) { console.error('usage: hero-audit.mjs <url | file.html> [--out dir] [--selector "<css>"] [--src folder] [--throttle] [--runs N] [--viewports 390x844,1440x900]'); process.exit(2); }
+if (!target) { console.error('usage: hero-audit.mjs <url | file.html> [--out dir] [--selector "<css>"] [--src folder] [--throttle] [--proof] [--runs N] [--viewports 390x844,1440x900]'); process.exit(2); }
 if (!/^https?:|^file:/.test(target) && existsSync(target)) target = pathToFileURL(resolve(target)).href;
 const outDir = resolve(opt("--out", "hero-audit"));
 const selector = opt("--selector", null);
 const src = opt("--src", null);
-const throttle = args.includes("--throttle");
-const runs = Math.max(1, Number(opt("--runs", 1)) || 1);
+// --proof: the full measurement for a speed claim (5 runs, Slow 4G + 4x CPU, five widths). Explicit flags still win.
+const proof = args.includes("--proof");
+const throttle = proof || args.includes("--throttle");
+const runs = Math.max(1, Number(opt("--runs", proof ? 5 : 1)) || 1);
 const median = (a) => { const v = a.filter((x) => x != null).sort((m, n) => m - n); return v.length ? v[Math.floor((v.length - 1) / 2)] : null; };
 const parseSize = (s) => { const [w, h] = String(s).toLowerCase().trim().split("x").map(Number); return w > 0 && h > 0 ? { width: Math.round(w), height: Math.round(h) } : null; };
 const DESK = parseSize(opt("--desktop", "1440x900")) || { width: 1440, height: 900 };
 const PHONE = parseSize(opt("--phone", "390x844")) || { width: 390, height: 844 };
-const vpArg = opt("--viewports", null);
+const vpArg = opt("--viewports", proof ? "360x780,390x844,768x1024,1024x768,1440x900" : null);
 const vpList = vpArg ? vpArg.split(",").map(parseSize).filter(Boolean) : [DESK, PHONE];
 if (!vpList.length) { console.error(`--viewports: no valid WxH sizes in "${vpArg}"`); process.exit(2); }
 const same = (a, b) => a.width === b.width && a.height === b.height;

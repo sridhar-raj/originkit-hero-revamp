@@ -50,22 +50,20 @@ at a time. It never asks you to paste a key or token into the chat; you run the 
 
 ## How it works
 
-1. **Measure** the current hero in a real browser, from phone to desktop width: LCP (its element and its
-   breakdown), CLS, blocking time, when the CTAs become visible, headline length and contrast over the real
-   backdrop, CTA size and labels, fonts, images, accessibility basics, frame timing, template tells, how dense
-   the visual slot is, and Next.js traps in the source.
-2. **Diagnose** in a fixed order: clarity, action, legibility, speed, distinctiveness, each tied to evidence.
-3. **Rebuild:**
-   - pick the archetype from the product's truth with a decision tree;
-   - design the signature moment (one product state, 3-5 beats, a still for reduced motion);
-   - build the hero mostly from OriginKit components (a hero section as the base, or backgrounds, 3D objects,
-     text effects and buttons), each customised to the product's copy, palette, data and motion speed;
-   - write the copy from a sourced kit (headline formulas, outcome CTAs, proof ranked by credibility, never
-     invented);
-   - pass a craft gate built on the [ui-craft](#works-well-with) loop: real product surfaces, quiet type, one
-     moment of motion, checked at 360-1440 px in light and dark.
-4. **Prove** it: the same audit again, then a before/after report with a slider, a scorecard and a Markdown
-   table for the PR. Measured results and judgment calls are labelled as such.
+About 45 minutes for a revamp, with one question to you along the way.
+
+1. **Look** (5 min): one quick audit at desktop and phone (speed, CTA position, contrast, fonts, images,
+   template tells, Next.js traps) while the page itself is read for the product, its claim and its brand.
+   The result is five lines, not an essay.
+2. **Two directions as stills** (10 min, the one checkpoint): two compositions from a deck of eight that
+   differ from each other and from the last revamps (`history.md`), each with its OriginKit pieces, palette,
+   type and headline, shown as mock screenshots side by side. You pick one or say what to change.
+3. **Build** (20 min) from the agreed OriginKit pieces, each customised to the product's palette, words,
+   data and motion speed, inside a real product surface, with Next.js done right.
+4. **Look and fix** (at most two rounds): screenshots at 1440 and 390 px put beside the quality bar and
+   judged against a short checklist.
+5. **Prove** (5 min): the same audit again (`--proof` when the claim is about speed) and a before/after
+   report with a slider and a Markdown table. Measured results and judgment calls are labelled as such.
 
 ## Install
 
@@ -94,8 +92,10 @@ audit warns when it sees a dev server.
 
 | Path | What it is |
 |---|---|
-| `SKILL.md` | The method: a quick path, measure → diagnose → rebuild → prove, and what "done" means |
-| `scripts/hero-audit.mjs` | The browser audit (Playwright/Chromium); writes `audit.json` and first-screen screenshots |
+| `SKILL.md` | The method: look → two directions → build → look and fix → prove, with a time budget and what "done" means |
+| `references/directions.md` | The look: the quality bar, eight compositions, the real-surface rule, light and type recipes, the pre-show checklist |
+| `history.md` | One line per revamp (composition, palette, pieces), so the next one is different |
+| `scripts/hero-audit.mjs` | The browser audit (Playwright/Chromium); writes `audit.json` and first-screen screenshots; `--proof` for the full speed measurement |
 | `scripts/hero-compare.mjs` | The before/after report: slider, scorecard, metric table |
 | `references/decision-tree.md` | Questions about the product's truth → 1-2 archetypes, and why not the others |
 | `references/signature.md` | How to design the signature moment, with a worked example per archetype |
