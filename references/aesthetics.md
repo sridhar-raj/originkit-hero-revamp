@@ -24,7 +24,7 @@ extractions: use them as ranges, not specs. Sources at the end.
 | Role | Spec |
 |---|---|
 | Headline | grotesk/neo-grotesk sans, weight **500-600** (700+ reads "poster"), `clamp(2.5rem, 6vw, 5.5rem)`, line-height 0.95-1.1, tracking −0.02 to −0.045em (tighter as it grows), `text-balance`; ≤ 8 words |
-| Accent | at most **one** accent word: the brand colour, or a serif/italic word inside the sans line |
+| Accent | **None by default:** the headline is one face, one weight, one colour. A coloured or serif/italic word is a device, not a habit: use it only when that one word *is* the idea, at most once in any three revamps (check the `accent` field of the last lines in `history.md`), never two in a row. Users notice the repeat across a portfolio ("why the 2 text option in every h1?") |
 | Sub-copy | 17-20 px, line-height 1.5, ~60-65 % contrast grey, max 520-600 px wide |
 | Labels | 12-13 px, sentence case, grey or mono; **not** tracked-out uppercase eyebrows (a 2026 tell) |
 | Families | Inter Display, Geist, Söhne, Switzer, General Sans, Satoshi, a custom brand face, plus a mono for technical texture; the brand's font wins. Geist or Instrument Serif aren't wrong, the *default pairing with no other decision* is |

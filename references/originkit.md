@@ -67,8 +67,8 @@ as-is. Hand-written code is limited to glue, layout and the product's real data.
 
 The **signature moment** still comes from the product's truth: one piece carries it, chosen because it says
 something true about the product (water caustics for a sea-freight tracker, a data-pixel arc for an analytics
-tool, a glass dodecahedron for a dev tool about many sides of one system). Everything else stays quiet: a text
-effect on one word, a distinctive primary button. Never three loud components competing. Wire the props to
+tool, a glass dodecahedron for a dev tool about many sides of one system). Everything else stays quiet: a distinctive primary button, at most one small
+supporting piece (never a text effect on the headline by habit; see the accent rule in aesthetics.md). Never three loud components competing. Wire the props to
 the product's state (hover, selected industry, live numbers), so it's part of the product, not decoration.
 The components are the material; what they do is the signature moment, designed with `signature.md`.
 

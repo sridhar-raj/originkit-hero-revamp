@@ -116,7 +116,7 @@ from. This is the only question in the whole revamp, so ask the factual question
 ## 4. Build (20 min)
 
 - **Design system first:** a `DESIGN.md` or tokens in the project win over anything here.
-- **The look:** `references/aesthetics.md`: type (weight 500-600, tracking −0.02 to −0.045em, one accent word),
+- **The look:** `references/aesthetics.md`: type (weight 500-600, tracking −0.02 to −0.045em, one colour and one style by default; an accent word is a rare device, see aesthetics.md),
   OKLCH palette with one accent ≤ 5-8 % of pixels, light with a direction and consequences (key, rim, spill,
   contact shadow; no glow without a shadow), grain 2-6 %, hairlines, glass on the nav and at most one panel,
   at most 2 moving layers. Futurism lives in one layer; trust lives in the type, copy and real product.

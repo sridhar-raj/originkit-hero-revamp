@@ -10,7 +10,7 @@ Two pieces of work were approved; everything else was rejected as "bad", "generi
 | Approved | Why it worked |
 |---|---|
 | **X Post section 01, Iris AI assistant** (dark cinematic) | A black stage; one OriginKit component lit like a product render (spotlight rays, a colour spill, a floor pool, dust, vignette); the component *inside a working product* (the assistant's avatar, with a real prompt box and a streamed answer); small refined type (Switzer). |
-| **Lowfield** (`cases/lowfield`, light editorial) | One real product object carrying real data (the bag's label, roast curve, roast stamp, delivery timeline); a huge confident headline with one accent word; a single warm palette from the product; a CTA with the price in it. |
+| **Lowfield** (`cases/lowfield`, light editorial) | One real product object carrying real data (the bag's label, roast curve, roast stamp, delivery timeline); a huge confident headline; a single warm palette from the product; a CTA with the price in it. |
 
 What both share, and what every rejected hero lacked:
 - **One hero object, big and lit,** taking 40-60 % of the first screen. Rejected heroes had small decoration.
@@ -36,7 +36,7 @@ names its OriginKit categories (browse free with `npx originkit search`).
 |---|---|---|---|
 | 1 | **Lit object stage** | The hero object centred on a dark stage under a spotlight, floor reflection, headline small above or below. Iris-style. | 3D `animation`, `background-animation` (rays, dust), `button` |
 | 2 | **Working surface** | A real product UI card (chat, composer, checkout, player) with the component living inside it as its state (avatar, progress, empty state); headline to one side. | `interactive-elements`, `core`, `text` |
-| 3 | **Editorial + object** | A huge left-aligned headline with one accent word; the product object bleeding off the right, carrying real data. Lowfield-style. | `animation`, `image`, `border` |
+| 3 | **Editorial + object** | A huge left-aligned headline (one colour; the object carries the emphasis); the product object bleeding off the right, carrying real data. Lowfield-style. | `animation`, `image`, `border` |
 | 4 | **Full-bleed world** | A full-screen scene (shader, landscape, field) that *is* the product's subject; copy sits in one quiet corner on a measured backing. | `background-animation`, `section · hero` |
 | 5 | **Type is the hero** | The headline as the visual: a text effect fills, reveals or distorts the letters; a small real product detail anchors it. | `text`, `background-animation` (inside the letters) |
 | 6 | **Portal** | The scene seen through a shape (arch, circle, tall pill, device outline) on a quiet ground; headline outside the frame. | `background-animation`, `image`, `animation` |
@@ -82,7 +82,7 @@ Full spec (with palette, light, motion and the slop audit): `aesthetics.md`.
   0.95-1.05, `text-balance`. Everything else 14-18 px.
 - One face with character (Switzer, Geist, Satoshi, General Sans, Instrument Serif for an editorial accent);
   not default Inter at 600. The brand's font wins when it has one.
-- One accent: a colour or italic on **one** word, never a gradient word.
+- No accent word by default (one face, one weight, one colour). A colour or italic word only when that word is the idea, at most once in three revamps (see `history.md`), never a gradient word.
 
 ## Before showing it (the pre-show checklist)
 
