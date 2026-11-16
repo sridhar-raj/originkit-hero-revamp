@@ -32,13 +32,6 @@ A reading app. *“Remember every book you read.”* Typographic covers fanned i
 
 [**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/verso) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/verso/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-verso.html)
 
-### Tide
-A marine forecast. *“Know the water before you leave the house.”* Calm sea-glass water (OriginKit) behind the day's best window to go out: tide curve, swell and wind.
-
-[![Tide: before and after](cases/tide/compare.jpg)](https://originkit-x-posts.vercel.app/revamp/tide)
-
-[**Live after ↗**](https://originkit-x-posts.vercel.app/revamp/tide) · [Recording](https://sridhar-raj.github.io/originkit-hero-revamp/cases/tide/after-loop-desktop.mp4) · [Live before](https://sridhar-raj.github.io/originkit-hero-revamp/demo/before-tide.html)
-
 ### Lowfield
 A coffee subscription. *“Roasted on Tuesday, at your door by Thursday”*, proved by the bag's own label.
 
