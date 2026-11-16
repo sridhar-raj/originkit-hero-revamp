@@ -14,6 +14,9 @@ measured, each from a different kind of bad first screen:
 - [Nacre](https://sridhar-raj.github.io/originkit-hero-revamp/cases/nacre/report.html), a perfume sample set:
   "Watch a scent change on your skin", a ray-traced crystal whose inner light is the scent's dry-down.
   A centred stack with the notes and the readout either side of the object.
+- [Halyard](https://sridhar-raj.github.io/originkit-hero-revamp/cases/halyard/report.html), an AI incident-response agent: a warm horizon light with the live incident resolving on it.
+- [Ferro](https://sridhar-raj.github.io/originkit-hero-revamp/cases/ferro/report.html), treasury for finance teams: a calm sky through an arched window and a live cash position.
+- [Sieve](https://sridhar-raj.github.io/originkit-hero-revamp/cases/sieve/report.html), a privacy layer for AI prompts: a prompt passing through a glass prism, raw on one side, redacted on the other.
 
 On a throttled phone connection (Slow 4G, 4× CPU, median of 3) the largest paint drops from 0.9-3.5 s to
 0.31-0.33 s, the headline is the largest paint in every after, and every case ends with no failures and no

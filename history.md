@@ -5,3 +5,6 @@ OriginKit slugs. Step 2 reads the last three lines and picks compositions, palet
 
 2026-11-13 · Lowfield (demo, coffee) · 3 Editorial + object · cream #efe6d6, ink #1d140f, rust #c8471f · (worked example)
 2026-11-14 · Nacre (demo, perfume) · 1 Lit object stage (light) · blush #f3ece8, ink #1b1615 · refract cube (worked example)
+2026-11-16 · Halyard (example, AI incident response) · 7 Horizon · near-black #08090b, warm white #fff4e6, amber #ffb36b · beyond-horizon
+2026-11-16 · Ferro (example, treasury) · 6 Portal · warm off-white #f6f4ef, ink #141414, sky #7fafe6 · cloud-sky
+2026-11-16 · Sieve (example, AI privacy) · 5 Type is the hero · cool grey #ecedef, ink #0e1116, cobalt #2a4bff · prism-glass-dodecahedron
