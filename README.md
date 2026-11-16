@@ -50,20 +50,23 @@ at a time. It never asks you to paste a key or token into the chat; you run the 
 
 ## How it works
 
-About 45 minutes for a revamp, with one question to you along the way.
+About 55 minutes for a revamp, with one question to you along the way.
 
-1. **Look** (5 min): one quick audit at desktop and phone (speed, CTA position, contrast, fonts, images,
-   template tells, Next.js traps) while the page itself is read for the product, its claim and its brand.
-   The result is five lines, not an essay.
-2. **Two directions as stills** (10 min, the one checkpoint): two compositions from a deck of eight that
-   differ from each other and from the last revamps (`history.md`), each with its OriginKit pieces, palette,
-   type and headline, shown as mock screenshots side by side. You pick one or say what to change.
-3. **Build** (20 min) from the agreed OriginKit pieces, each customised to the product's palette, words,
-   data and motion speed, inside a real product surface, with Next.js done right.
-4. **Look and fix** (at most two rounds): screenshots at 1440 and 390 px put beside the quality bar and
-   judged against a short checklist.
-5. **Prove** (5 min): the same audit again (`--proof` when the claim is about speed) and a before/after
-   report with a slider and a Markdown table. Measured results and judgment calls are labelled as such.
+1. **Look** (5 min): one quick audit at desktop and phone while the page is read for the product, its claim
+   and its brand. The result is five lines, not an essay.
+2. **Moodboard** (8 min): 5-10 real hero references collected from Pinterest (`scripts/pinterest-refs.mjs`:
+   designer sources first, hero-shaped, high-resolution, palette and tone measured, a numbered moodboard), then
+   judged (premium signals kept, AI-template tells rejected) and analysed across seven dimensions into a
+   borrow list (mood only) and the hero's own concept. Never a copy: traits shared by 3+ references, at most
+   one dimension from any single one, and the references stay local.
+3. **Two directions as stills** (10 min, the one checkpoint): two compositions from a deck of eight, each
+   taking its mood from the board, shown as mock screenshots beside the moodboard. You pick one.
+4. **Build** (20 min) from the agreed OriginKit pieces, customised to the product, to a modern-futuristic-
+   enterprise spec (`references/aesthetics.md`: type, OKLCH palette, light with consequences, one moving
+   moment, a real product surface).
+5. **Look and fix** (at most two rounds): screenshots beside the bar and on the moodboard, the slop audit, and
+   the copy test.
+6. **Prove** (5 min): the same audit again and a before/after report.
 
 ## Install
 
@@ -93,6 +96,9 @@ audit warns when it sees a dev server.
 | Path | What it is |
 |---|---|
 | `SKILL.md` | The method: look → two directions → build → look and fix → prove, with a time budget and what "done" means |
+| `references/moodboard.md` | Collecting and analysing references into an original design |
+| `references/aesthetics.md` | The modern-futuristic-enterprise spec and the slop audit |
+| `scripts/pinterest-refs.mjs` | Pinterest search → 5-12 hero references and a moodboard |
 | `references/directions.md` | The look: the quality bar, eight compositions, the real-surface rule, light and type recipes, the pre-show checklist |
 | `history.md` | One line per revamp (composition, palette, pieces), so the next one is different |
 | `scripts/hero-audit.mjs` | The browser audit (Playwright/Chromium); writes `audit.json` and first-screen screenshots; `--proof` for the full speed measurement |

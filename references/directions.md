@@ -75,7 +75,10 @@ sun-like gradient, never a flat white page.
 
 ## Type
 
-- One display line: 64-96 px at desktop (`clamp`), weight 500-700, tracking −0.02 to −0.045 em, leading
+Full spec (with palette, light, motion and the slop audit): `aesthetics.md`.
+
+
+- One display line: 64-88 px at desktop (`clamp(2.5rem,6vw,5.5rem)`), weight 500-600 (700+ reads "poster"), tracking −0.02 to −0.045 em, leading
   0.95-1.05, `text-balance`. Everything else 14-18 px.
 - One face with character (Switzer, Geist, Satoshi, General Sans, Instrument Serif for an editorial accent);
   not default Inter at 600. The brand's font wins when it has one.
